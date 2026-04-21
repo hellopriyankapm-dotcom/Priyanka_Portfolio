@@ -1642,8 +1642,7 @@ async function sendChat() {
   chatHistory.push({ role: 'user', content: text });
   addTyping();
 
-  // PROXY_URL: replace with your Cloudflare Worker / Netlify Function URL after setup
-  const PROXY_URL = 'https://priyanka-chat.hellopriyankapm-dotcom.workers.dev';
+  const PROXY_URL = 'https://morning-cloud-6cad.hello-priyankapm.workers.dev';
 
   try {
     const res = await fetch(PROXY_URL, {
