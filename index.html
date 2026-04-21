@@ -289,38 +289,35 @@ nav {
 .cv-admin-hint { font-size: 0.65rem; color: var(--faint); margin-top: 0.5rem; line-height: 1.4; }
 
 /* ── TESTIMONIALS ── */
-.testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.testi-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 .testi-card {
   background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 8px; padding: 1.2rem 1.3rem;
+  border-radius: 8px; padding: 1.3rem 1.4rem;
   position: relative; transition: border-color 0.2s;
 }
 .testi-card:hover { border-color: var(--sage-light); }
-.testi-quote-mark {
-  font-family: var(--serif); font-size: 2.5rem; line-height: 1;
-  color: var(--sage-light); margin-bottom: 0.3rem; display: block;
+.testi-linkedin {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 22px; height: 22px; border-radius: 3px;
+  background: #0A66C2; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--sans); font-weight: 700; font-size: 0.72rem;
+  letter-spacing: -0.02em; text-decoration: none;
+  transition: opacity 0.15s, transform 0.15s;
 }
+.testi-linkedin:hover { opacity: 0.85; transform: translateY(-1px); }
 .testi-text {
-  font-size: 0.875rem; color: var(--ink2); line-height: 1.7;
-  font-style: italic; margin-bottom: 1rem;
+  font-size: 0.9rem; color: var(--ink2); line-height: 1.7;
+  font-style: italic; margin-bottom: 1rem; padding-right: 2rem;
 }
-.testi-person { display: flex; align-items: center; gap: 0.6rem; }
+.testi-person { display: flex; align-items: center; gap: 0.7rem; }
 .testi-avatar {
-  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
   background: var(--sage); display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; font-weight: 700; color: #fff;
+  font-size: 0.78rem; font-weight: 700; color: #fff;
 }
-.testi-name { font-size: 0.78rem; font-weight: 600; color: var(--ink); }
-.testi-role { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
-.testi-placeholder {
-  border: 1.5px dashed var(--border2); background: transparent;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 140px; cursor: default; gap: 0.4rem;
-}
-.testi-placeholder-icon { font-size: 1.2rem; opacity: 0.3; }
-.testi-placeholder-text { font-size: 0.75rem; color: var(--faint); text-align: center; line-height: 1.5; }
-
-@media (max-width: 640px) { .testi-grid { grid-template-columns: 1fr; } }
+.testi-name { font-size: 0.85rem; font-weight: 600; color: var(--sage); }
+.testi-role { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.4; }
 
 /* ── MAIN CONTENT ── */
 main {
@@ -1071,43 +1068,30 @@ footer {
     <div class="testi-grid">
 
       <div class="testi-card reveal">
-        <span class="testi-quote-mark">"</span>
-        <p class="testi-text">Priyanka brings a rare combination — she speaks the language of both business stakeholders and engineering teams. She turned one of our most complex public-sector processes into a clear, phased product roadmap that actually shipped.</p>
+        <a href="https://www.linkedin.com/in/pmpriyanka/details/recommendations/" target="_blank" rel="noopener" class="testi-linkedin" aria-label="View on LinkedIn">in</a>
+        <p class="testi-text">"Priyanka is a consultant who naturally brings a strong product mindset into her work. She consistently focuses beyond feature delivery by understanding user needs, business impact, and overall experience. She actively contributes to prioritization discussions, balancing value, feasibility, and scalability. What stands out is her ability to challenge requirements constructively and think from an end-user perspective, often leading to better outcomes. With her strong communication and ability to align stakeholders, Priyanka possesses the strategic mindset and technical depth required to excel in Business Architecture or Product Leadership roles."</p>
         <div class="testi-person">
-          <div class="testi-avatar">SR</div>
+          <div class="testi-avatar">CB</div>
           <div>
-            <div class="testi-name">Stakeholder · Recommendation</div>
-            <div class="testi-role">Replace with name, role & company from LinkedIn</div>
+            <div class="testi-name">Chris Mike Bizimana</div>
+            <div class="testi-role">Certified Pega Senior System Architect &amp; Scrum Master</div>
           </div>
         </div>
       </div>
 
       <div class="testi-card reveal" style="transition-delay:0.1s">
-        <span class="testi-quote-mark">"</span>
-        <p class="testi-text">Working with Priyanka on the NBA platform was a masterclass in stakeholder alignment. She kept the product vision sharp while managing competing priorities across 4 channels — and the results spoke for themselves.</p>
+        <a href="https://www.linkedin.com/in/pmpriyanka/details/recommendations/" target="_blank" rel="noopener" class="testi-linkedin" aria-label="View on LinkedIn">in</a>
+        <p class="testi-text">"Priyanka is a highly professional individual who brings a well-rounded understanding of both the technical and business aspects of a project. With her extensive experience in Pega, she consistently demonstrates the ability to analyze complex business requirements and transform them into practical, high-quality solutions. She is also very skilled in building user interfaces in Pega, particularly using Theme-Cosmos and Constellation. Her strong technical expertise, combined with her clear understanding of business needs, makes her a valuable contributor to any team."</p>
         <div class="testi-person">
-          <div class="testi-avatar">SR</div>
+          <div class="testi-avatar">MT</div>
           <div>
-            <div class="testi-name">Stakeholder · Recommendation</div>
-            <div class="testi-role">Replace with name, role & company from LinkedIn</div>
+            <div class="testi-name">Manjunath Tanga</div>
+            <div class="testi-role">Pega Certified Lead System Architect · Manager at Cognizant</div>
           </div>
         </div>
       </div>
 
-      <div class="testi-card testi-placeholder reveal" style="transition-delay:0.2s">
-        <div class="testi-placeholder-icon">＋</div>
-        <div class="testi-placeholder-text">Add a 3rd testimonial<br>from LinkedIn recommendations</div>
-      </div>
-
-      <div class="testi-card testi-placeholder reveal" style="transition-delay:0.3s">
-        <div class="testi-placeholder-icon">＋</div>
-        <div class="testi-placeholder-text">Add a 4th testimonial<br>from LinkedIn recommendations</div>
-      </div>
-
     </div>
-    <p style="font-size:0.72rem;color:var(--faint);margin-top:1rem;font-family:var(--mono);">
-      → Replace placeholder quotes with real ones from your <a href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" style="color:var(--sage);">LinkedIn recommendations</a>
-    </p>
   </div>
   </section>
 
