@@ -1354,11 +1354,15 @@ const obs = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 // ── DARK / LIGHT TOGGLE ──
+// First visit: pick default from user's local hour (dark 18:00–05:59, light otherwise).
+// Any manual toggle persists in localStorage and takes precedence on future visits.
 const toggle = document.getElementById('themeToggle');
 const html = document.documentElement;
-const saved = localStorage.getItem('theme') || 'light';
-html.setAttribute('data-theme', saved);
-toggle.textContent = saved === 'dark' ? '☀️' : '🌙';
+const saved = localStorage.getItem('theme');
+const hour = new Date().getHours();
+const initial = saved || ((hour >= 18 || hour < 6) ? 'dark' : 'light');
+html.setAttribute('data-theme', initial);
+toggle.textContent = initial === 'dark' ? '☀️' : '🌙';
 
 toggle.addEventListener('click', () => {
   const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
