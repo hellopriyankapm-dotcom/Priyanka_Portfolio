@@ -561,17 +561,72 @@ section:last-of-type { border-bottom: none; }
 .cert-org { font-size: 0.7rem; color: var(--faint); }
 
 /* ── HOW I THINK ── */
-.think-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.4rem; }
-.think-card {
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 10px; padding: 1.5rem 1.4rem;
-  transition: border-color 0.2s;
+.think-eyebrow {
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage);
+  margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem;
 }
-.think-card:hover { border-color: var(--sage); }
-.think-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
-.think-title { font-family: 'Libre Baskerville', serif; font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.3; }
-.think-body { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+.think-eyebrow::before { content: '✦'; font-size: 0.8rem; }
+.think-subtitle {
+  font-size: 0.95rem; color: var(--muted); line-height: 1.6;
+  max-width: 640px; margin-top: 0.4rem; margin-bottom: 2.4rem;
+}
+.think-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem; margin-top: 2.5rem; padding-top: 1.2rem;
+}
+.think-card {
+  position: relative;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 2rem 1.5rem 1.4rem;
+  transition: border-color 0.25s, transform 0.25s;
+  display: flex; flex-direction: column;
+}
+.think-card:hover { border-color: var(--sage); transform: translateY(-3px); }
+.think-num {
+  position: absolute; top: -18px; left: 1.5rem;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg); border: 1.5px solid var(--sage);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+  color: var(--sage); letter-spacing: 0;
+}
+.think-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; font-size: 1.3rem;
+  margin-bottom: 1rem; margin-top: 0.4rem;
+}
+.think-title {
+  font-family: 'Libre Baskerville', serif; font-size: 1.05rem;
+  font-weight: 700; color: var(--ink);
+  margin-bottom: 0.9rem; line-height: 1.35;
+}
+.think-divider { height: 1px; background: var(--border); margin: 0 -1.5rem 1rem; }
+.think-body {
+  font-size: 0.84rem; color: var(--muted); line-height: 1.75;
+  margin-bottom: 1.1rem; flex: 1;
+}
 .think-body strong { color: var(--ink2); font-weight: 600; }
+.think-body em { font-style: italic; color: var(--ink2); }
+.think-chips {
+  display: flex; flex-wrap: wrap; gap: 0.45rem;
+  padding-top: 0.9rem; border-top: 1px dashed var(--border);
+}
+.think-chip {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.7rem; font-weight: 500; padding: 0.32rem 0.7rem;
+  background: var(--bg); border: 1px solid var(--border2);
+  border-radius: 6px; color: var(--ink2);
+  font-family: var(--mono);
+}
+.think-chip-icon { font-size: 0.8rem; line-height: 1; }
+.think-highlight {
+  background: var(--sage-pale); color: var(--sage);
+  padding: 0.08rem 0.4rem; border-radius: 4px; font-weight: 600;
+  border: 1px solid var(--sage-tag);
+}
 
 /* ── EDUCATION ── */
 .edu-list { display: flex; flex-direction: column; gap: 1.2rem; }
@@ -1001,25 +1056,45 @@ footer {
 
   <!-- ── PM PHILOSOPHY ── -->
   <section id="philosophy">
+    <div class="think-eyebrow">Product Thinking</div>
     <h2 class="section-title">How I Think About Product</h2>
+    <p class="think-subtitle">A mindset and operating model I use to build products that create impact, not noise.</p>
     <div class="think-grid">
 
       <div class="think-card reveal">
-        <span class="think-icon">🎯</span>
+        <span class="think-num">01</span>
+        <div class="think-icon">🎯</div>
         <div class="think-title">Outcomes Over Outputs</div>
-        <p class="think-body">I measure success by <strong>business and user impact</strong> — not tickets closed or features shipped. Before writing a PRD I ask: what behaviour changes if we build this, and how will we know? That framing kept a 1.2M-customer decisioning platform focused on <strong>churn reversal</strong>, not just campaign volume.</p>
+        <div class="think-divider"></div>
+        <p class="think-body">I measure success by <strong>business and user impact</strong> — not tickets closed or features shipped. Before any PRD, I ask: what behaviour changes if we build this, and how will we know?</p>
+        <div class="think-chips">
+          <span class="think-chip"><span class="think-chip-icon">👥</span>1.2M+ users</span>
+          <span class="think-chip"><span class="think-chip-icon">📈</span>Churn reversal</span>
+        </div>
       </div>
 
       <div class="think-card reveal">
-        <span class="think-icon">🔬</span>
+        <span class="think-num">02</span>
+        <div class="think-icon">🔬</div>
         <div class="think-title">Data-Informed, Not Data-Driven</div>
-        <p class="think-body">Quantitative data tells you <em>what</em> is happening; qualitative discovery tells you <em>why</em>. I pair <strong>agent and caseworker interviews</strong> with structured A/B testing — 12 experiments across channels — to validate hypotheses before scaling. When data conflicts with user insight, I investigate rather than default to either.</p>
+        <div class="think-divider"></div>
+        <p class="think-body">Quantitative data tells me <strong>what's happening</strong>; qualitative discovery reveals <strong>why</strong>. I pair agent and caseworker interviews with structured testing — running <span class="think-highlight">12 experiments</span> across channels to validate before scaling.</p>
+        <div class="think-chips">
+          <span class="think-chip"><span class="think-chip-icon">🔍</span>Investigate &gt; Default</span>
+          <span class="think-chip"><span class="think-chip-icon">🧪</span>A/B rigour</span>
+        </div>
       </div>
 
       <div class="think-card reveal">
-        <span class="think-icon">🧭</span>
+        <span class="think-num">03</span>
+        <div class="think-icon">🧭</div>
         <div class="think-title">Structured Under Ambiguity</div>
-        <p class="think-body">In regulated environments — banking, public sector, insurance — ambiguity is the norm. I use <strong>RICE prioritisation</strong> weighted by regulatory risk and integration complexity, run alignment workshops across stakeholder groups (up to 26 funds in one engagement), and document trade-offs explicitly so decisions are auditable and reversible.</p>
+        <div class="think-divider"></div>
+        <p class="think-body">In regulated, complex environments, ambiguity is the norm. I use <strong>RICE prioritisation</strong>, run alignment workshops across stakeholders (up to 26 funds), and document trade-offs so decisions are auditable and reversible.</p>
+        <div class="think-chips">
+          <span class="think-chip"><span class="think-chip-icon">🎯</span>RICE prioritisation</span>
+          <span class="think-chip"><span class="think-chip-icon">👥</span>26 funds aligned</span>
+        </div>
       </div>
 
     </div>
