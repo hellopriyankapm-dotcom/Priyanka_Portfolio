@@ -1,41 +1,25 @@
-name: Auto-merge Claude branches
+name: Auto Merge
 
 on:
-  push:
-    branches:
-      - 'claude/**'
-
-permissions:
-  contents: write
-  pull-requests: write
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Create PR if not exists
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Detect default branch
         run: |
-          BRANCH="${{ github.ref_name }}"
-          TITLE=$(git log -1 --pretty=%s)
-          EXISTING=$(gh pr list --head "$BRANCH" --json number -q '.[0].number')
-          if [ -z "$EXISTING" ]; then
-            gh pr create \
-              --title "$TITLE" \
-              --body "Auto-created by Claude Code" \
-              --base main \
-              --head "$BRANCH"
-          fi
+          DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef -q '.defaultBranchRef.name')
+          echo "Using branch: $DEFAULT_BRANCH"
 
-      - name: Merge PR into main
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pull Request
         run: |
-          BRANCH="${{ github.ref_name }}"
-          PR=$(gh pr list --head "$BRANCH" --json number -q '.[0].number')
-          if [ -n "$PR" ]; then
-            gh pr merge "$PR" --merge --delete-branch
-          fi
+          gh pr create --base $DEFAULT_BRANCH --head $DEFAULT_BRANCH
+
+      - name: Merge Pull Request
+        run: |
+          gh pr merge --auto --base $DEFAULT_BRANCH
