@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" rx="20" ry="20" fill="#1B3826"/>
+  <!-- D in sage green (behind) -->
+  <text x="38" y="73" font-family="Georgia, serif" font-size="62" font-weight="700" fill="#7aaa82" letter-spacing="-2">D</text>
+  <!-- P in white (front) -->
+  <text x="14" y="73" font-family="Georgia, serif" font-size="62" font-weight="700" fill="#ffffff">P</text>
+</svg>
