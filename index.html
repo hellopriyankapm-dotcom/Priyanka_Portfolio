@@ -560,6 +560,19 @@ section:last-of-type { border-bottom: none; }
 .cert-name { font-size: 0.78rem; font-weight: 600; color: var(--ink); line-height: 1.35; margin-bottom: 0.15rem; }
 .cert-org { font-size: 0.7rem; color: var(--faint); }
 
+/* ── HOW I THINK ── */
+.think-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.4rem; }
+.think-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.5rem 1.4rem;
+  transition: border-color 0.2s;
+}
+.think-card:hover { border-color: var(--sage); }
+.think-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
+.think-title { font-family: 'Libre Baskerville', serif; font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.3; }
+.think-body { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+.think-body strong { color: var(--ink2); font-weight: 600; }
+
 /* ── EDUCATION ── */
 .edu-list { display: flex; flex-direction: column; gap: 1.2rem; }
 .edu-item { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.2rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; }
@@ -621,6 +634,7 @@ footer {
 @media (max-width: 900px) {
   #dot-nav { display: none; }
   .cert-grid { grid-template-columns: 1fr 1fr; }
+  .think-grid { grid-template-columns: 1fr 1fr; }
   .hero { padding: 2.8rem 0 2rem; }
 }
 
@@ -657,6 +671,7 @@ footer {
 
   /* Certifications — single column on mobile */
   .cert-grid { grid-template-columns: 1fr; }
+  .think-grid { grid-template-columns: 1fr; }
 
   /* Education */
   .edu-item { flex-direction: column; gap: 0.4rem; }
@@ -733,6 +748,10 @@ footer {
   </div>
   <div class="dot-item" data-target="experience" onclick="scrollToSection('experience')">
     <span class="dot-label">Experience</span>
+    <span class="dot"></span>
+  </div>
+  <div class="dot-item" data-target="philosophy" onclick="scrollToSection('philosophy')">
+    <span class="dot-label">Philosophy</span>
     <span class="dot"></span>
   </div>
   <div class="dot-item" data-target="projects" onclick="scrollToSection('projects')">
@@ -975,6 +994,32 @@ footer {
           <li>Supported automation initiatives using <strong>UiPath RPA</strong>, improving efficiency in testing and defect management processes.</li>
           <li>Identified defects and edge cases early, reducing downstream production issues and improving overall system quality.</li>
         </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PM PHILOSOPHY ── -->
+  <section id="philosophy">
+    <h2 class="section-title">How I Think About Product</h2>
+    <div class="think-grid">
+
+      <div class="think-card reveal">
+        <span class="think-icon">🎯</span>
+        <div class="think-title">Outcomes Over Outputs</div>
+        <p class="think-body">I measure success by <strong>business and user impact</strong> — not tickets closed or features shipped. Before writing a PRD I ask: what behaviour changes if we build this, and how will we know? That framing kept a 1.2M-customer decisioning platform focused on <strong>churn reversal</strong>, not just campaign volume.</p>
+      </div>
+
+      <div class="think-card reveal">
+        <span class="think-icon">🔬</span>
+        <div class="think-title">Data-Informed, Not Data-Driven</div>
+        <p class="think-body">Quantitative data tells you <em>what</em> is happening; qualitative discovery tells you <em>why</em>. I pair <strong>agent and caseworker interviews</strong> with structured A/B testing — 12 experiments across channels — to validate hypotheses before scaling. When data conflicts with user insight, I investigate rather than default to either.</p>
+      </div>
+
+      <div class="think-card reveal">
+        <span class="think-icon">🧭</span>
+        <div class="think-title">Structured Under Ambiguity</div>
+        <p class="think-body">In regulated environments — banking, public sector, insurance — ambiguity is the norm. I use <strong>RICE prioritisation</strong> weighted by regulatory risk and integration complexity, run alignment workshops across stakeholder groups (up to 26 funds in one engagement), and document trade-offs explicitly so decisions are auditable and reversible.</p>
       </div>
 
     </div>
