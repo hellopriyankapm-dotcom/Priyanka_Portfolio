@@ -1504,6 +1504,10 @@ const CV_URL = 'https://drive.google.com/uc?export=download&id=1OOW_zVawtIY5NwHu
 
 function downloadCV(e) {
   e.preventDefault();
+  const location = e.currentTarget && e.currentTarget.id === 'nav-cv-btn' ? 'nav' : 'contact';
+  if (typeof gtag === 'function') {
+    gtag('event', 'cv_download', { location: location });
+  }
   const a = document.createElement('a');
   a.href = CV_URL; a.target = '_blank';
   a.download = 'Priyanka_Das_CV.pdf';
