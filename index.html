@@ -273,36 +273,6 @@ nav {
 }
 .nav-cv:hover { border-color: var(--sage); color: var(--sage); background: var(--sage-pale); }
 
-/* ── CV ADMIN PANEL ── */
-#cv-admin {
-  display: none;
-  position: fixed; bottom: 5rem; right: 1.5rem; z-index: 998;
-  background: var(--bg); border: 1px solid var(--border2);
-  border-radius: 10px; padding: 1.1rem 1.2rem; width: 300px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-}
-.cv-admin-title { font-size: 0.78rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
-.cv-admin-sub { font-size: 0.7rem; color: var(--muted); margin-bottom: 0.75rem; line-height: 1.5; }
-#cv-url-input {
-  width: 100%; font-size: 0.75rem; padding: 0.45rem 0.7rem;
-  border: 1px solid var(--border2); border-radius: 5px;
-  background: var(--bg2); color: var(--ink); margin-bottom: 0.6rem;
-  font-family: var(--mono); outline: none;
-}
-#cv-url-input:focus { border-color: var(--sage); }
-.cv-admin-btns { display: flex; gap: 0.5rem; }
-.cv-save-btn {
-  flex: 1; padding: 0.4rem; font-size: 0.72rem; font-weight: 600;
-  background: var(--sage); color: #fff; border: none;
-  border-radius: 4px; cursor: pointer;
-}
-.cv-close-btn {
-  padding: 0.4rem 0.8rem; font-size: 0.72rem;
-  background: var(--tag-bg); color: var(--muted); border: none;
-  border-radius: 4px; cursor: pointer;
-}
-.cv-admin-hint { font-size: 0.65rem; color: var(--faint); margin-top: 0.5rem; line-height: 1.4; }
-
 /* ── TESTIMONIALS ── */
 .testi-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 .testi-card {
@@ -749,9 +719,6 @@ footer {
   .contact-links { flex-direction: column; }
   .contact-links .cta-btn { justify-content: center; }
 
-  /* CV admin panel */
-  #cv-admin { width: calc(100vw - 3rem); right: 1rem; }
-
   /* Footer */
   footer { padding: 1.2rem 1.1rem; }
   .footer-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
@@ -769,18 +736,6 @@ footer {
 </style>
 </head>
 <body>
-
-<!-- ── CV ADMIN PANEL (triple-click footer copyright to open) ── -->
-<div id="cv-admin">
-  <div class="cv-admin-title">⚙ Update CV Download Link</div>
-  <div class="cv-admin-sub">Paste your Google Drive, Dropbox or any direct PDF link. Visitors will download it when they click "Download CV".</div>
-  <input id="cv-url-input" type="url" placeholder="https://drive.google.com/file/d/..." />
-  <div class="cv-admin-btns">
-    <button class="cv-save-btn" onclick="saveCV()">Save link</button>
-    <button class="cv-close-btn" onclick="document.getElementById('cv-admin').style.display='none'">Cancel</button>
-  </div>
-  <div class="cv-admin-hint">💡 Google Drive: File → Share → Anyone with link → Copy link.<br>Dropbox: change ?dl=0 to ?dl=1 for direct download.</div>
-</div>
 
 <!-- ── NAV ── -->
 <nav>
@@ -1544,46 +1499,16 @@ const statObs = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.h-stat-val[data-target]').forEach(el => statObs.observe(el));
 
-// ── CV DOWNLOAD + ADMIN ──
-const DEFAULT_CV = '';
-let cvClickCount = 0, cvClickTimer = null;
+// ── CV DOWNLOAD ──
+const CV_URL = 'https://drive.google.com/uc?export=download&id=1OOW_zVawtIY5NwHu3jANDWSqEb0G_VwJ';
 
 function downloadCV(e) {
   e.preventDefault();
-  const url = localStorage.getItem('cv_url') || DEFAULT_CV;
-  if (!url) {
-    document.getElementById('cv-admin').style.display = 'block';
-    document.getElementById('cv-url-input').focus();
-    return;
-  }
   const a = document.createElement('a');
-  a.href = url; a.target = '_blank';
+  a.href = CV_URL; a.target = '_blank';
   a.download = 'Priyanka_Das_CV.pdf';
   a.click();
 }
-
-function saveCV() {
-  const url = document.getElementById('cv-url-input').value.trim();
-  if (url) {
-    localStorage.setItem('cv_url', url);
-    document.getElementById('cv-admin').style.display = 'none';
-    alert('✓ CV link saved! Visitors can now download your CV.');
-  }
-}
-
-function openCVAdmin() {
-  const panel = document.getElementById('cv-admin');
-  const saved = localStorage.getItem('cv_url') || '';
-  document.getElementById('cv-url-input').value = saved;
-  panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-}
-
-document.querySelector('.footer-left').addEventListener('click', () => {
-  cvClickCount++;
-  clearTimeout(cvClickTimer);
-  cvClickTimer = setTimeout(() => { cvClickCount = 0; }, 800);
-  if (cvClickCount >= 3) { cvClickCount = 0; openCVAdmin(); }
-});
 
 // ── CASE STUDY TABS ──
 function switchTab(btn, project, tab) {
