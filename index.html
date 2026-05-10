@@ -488,6 +488,35 @@ section:last-of-type { border-bottom: none; }
 
 .proj-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
+.proj-links {
+  margin-top: 1rem;
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+.proj-link {
+  display: inline-flex;
+  align-items: center;
+  padding: .45rem .9rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: inherit;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+.proj-link:hover { transform: translateY(-1px); }
+.proj-link-primary {
+  background: #0f5f46;
+  color: #fff;
+  border-color: #0f5f46;
+}
+.proj-link-primary:hover {
+  background: #0a4a36;
+  border-color: #0a4a36;
+}
+
 /* ── CASE STUDY TABS ── */
 .cs-tabs {
   display: flex; gap: 2px; margin: 1rem 0 0;
@@ -1212,6 +1241,62 @@ footer {
           <span class="stack-tag">Figma Prototyping</span>
           <span class="stack-tag">User Research</span>
           <span class="stack-tag">Gamification</span>
+        </div>
+      </div>
+
+      <!-- PrepOS -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-top-left">
+            <div class="proj-name">PrepOS — Adaptive PM Interview Coach</div>
+            <div class="proj-type">PM Career Tools · Founder &amp; PM · Adaptive Learning Engine</div>
+          </div>
+          <div class="proj-stats">
+            <div class="proj-stat"><span class="stat-icon">📚</span><span class="stat-highlight">250</span> reviewed questions</div>
+            <div class="proj-stat"><span class="stat-icon">🧠</span><span class="stat-highlight">18</span> mapped PM concepts</div>
+          </div>
+        </div>
+
+        <div class="cs-tabs">
+          <button class="cs-tab active" onclick="switchTab(this,'prepos','problem')">Problem</button>
+          <button class="cs-tab" onclick="switchTab(this,'prepos','solution')">Solution</button>
+          <button class="cs-tab" onclick="switchTab(this,'prepos','impact')">Impact</button>
+        </div>
+
+        <div id="prepos-problem" class="cs-pane active">
+          <p>PM interview prep is generic. Candidates grind flat question dumps without knowing where they're weak, what level they're calibrated for, or whether their answer would actually pass a Senior PM bar at FAANG vs an APM bar at a startup. No coach adapted depth based on demonstrated mastery and the specific level + company style being targeted.</p>
+        </div>
+
+        <div id="prepos-solution" class="cs-pane">
+          <p>Designed and shipped <strong>PrepOS</strong> as a fully client-side adaptive PM interview coach. A 30-second calibration wizard captures target level, company style, interview date, and weakest concepts, then surfaces the highest-impact next rep from a 250-question library mapped to 18 PM concepts across 6 round types. A 5-mode coaching ladder (Coach → Guided → Light Feedback → Interview → Maintenance) scales scaffolding to demonstrated mastery; a voice mock simulator brings BYO-key Anthropic Claude or ChatGPT for live mock interviews; transparent 6-axis rubrics make every score inspectable.</p>
+        </div>
+
+        <div id="prepos-impact" class="cs-pane">
+          <div class="cs-impact-grid">
+            <span class="cs-impact-item">250 reviewed questions across 6 PM round types</span>
+            <span class="cs-impact-item">18 PM concepts with mastery memory + spaced repetition</span>
+            <span class="cs-impact-item">6 calibrated tracks — APM · PM · Senior · Staff · AI PM · PM-T</span>
+            <span class="cs-impact-item">Fully static — runs in-browser, zero per-user analytics</span>
+            <span class="cs-impact-item">Weekly shipping cadence; live at pmprepos.com</span>
+          </div>
+        </div>
+
+        <div class="proj-stack" style="margin-top:1rem;">
+          <span class="stack-tag">Next.js 15</span>
+          <span class="stack-tag">React 19</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Anthropic Claude API</span>
+          <span class="stack-tag">OpenAI ChatGPT API</span>
+          <span class="stack-tag">ElevenLabs Voice</span>
+          <span class="stack-tag">Adaptive Learning Engine</span>
+          <span class="stack-tag">Static Export · GitHub Pages</span>
+          <span class="stack-tag">PRD Writing</span>
+          <span class="stack-tag">User Research</span>
+        </div>
+
+        <div class="proj-links">
+          <a href="https://pmprepos.com" target="_blank" rel="noopener" class="proj-link proj-link-primary">Try the live app →</a>
+          <a href="https://github.com/hellopriyankapm-dotcom/PM-Interview-PrepOS" target="_blank" rel="noopener" class="proj-link">View on GitHub →</a>
         </div>
       </div>
 
