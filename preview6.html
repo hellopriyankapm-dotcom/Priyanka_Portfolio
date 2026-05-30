@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<title>Priyanka Das — Constellation (Preview 6)</title>
+<meta name="robots" content="noindex,nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:        #04050b;
+    --bg-2:      #07090f;
+    --panel:     #0c1018;
+    --panel-2:   #131826;
+    --line:      #1c2235;
+    --line-2:    #2a324a;
+
+    --teal:      #5eead4;
+    --indigo:    #818cf8;
+    --violet:    #c084fc;
+    --amber:     #fbbf24;
+    --rose:      #fb7185;
+    --emerald:   #34d399;
+
+    --text:      #f1f4fa;
+    --text-2:    #cbd0de;
+    --muted:     #8a92a8;
+    --muted-2:   #545b73;
+
+    --sans:  'Inter', system-ui, sans-serif;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono:  'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow: hidden;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
+  body { position: relative; }
+  ::selection { background: rgba(129,140,248,0.35); }
+
+  /* ── starfield ── */
+  .stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 12% 20%,  rgba(255,255,255,0.7) 50%, transparent 100%),
+      radial-gradient(1px 1px at 23% 70%,  rgba(255,255,255,0.4) 50%, transparent 100%),
+      radial-gradient(1px 1px at 40% 35%,  rgba(255,255,255,0.6) 50%, transparent 100%),
+      radial-gradient(1px 1px at 58% 80%,  rgba(255,255,255,0.45) 50%, transparent 100%),
+      radial-gradient(1px 1px at 71% 15%,  rgba(255,255,255,0.55) 50%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%,  rgba(255,255,255,0.4) 50%, transparent 100%),
+      radial-gradient(1px 1px at 92% 88%,  rgba(255,255,255,0.5) 50%, transparent 100%),
+      radial-gradient(2px 2px at 30% 92%,  rgba(129,140,248,0.6) 50%, transparent 100%),
+      radial-gradient(2px 2px at 78% 38%,  rgba(94,234,212,0.5) 50%, transparent 100%),
+      radial-gradient(2px 2px at 55% 12%,  rgba(192,132,252,0.5) 50%, transparent 100%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .nebula {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(50% 40% at 25% 30%, rgba(94,234,212,0.06), transparent 70%),
+      radial-gradient(45% 40% at 75% 70%, rgba(129,140,248,0.07), transparent 70%),
+      radial-gradient(30% 35% at 50% 50%, rgba(192,132,252,0.05), transparent 70%);
+  }
+
+  /* ── top bar ── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.4rem;
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    background: rgba(4,5,11,0.65);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand { display: flex; align-items: center; gap: 0.7rem; font-weight: 600; font-size: 0.92rem; }
+  .brand .orb-sm {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--teal), var(--indigo), var(--violet), var(--teal));
+    box-shadow: 0 0 12px rgba(129,140,248,0.45);
+  }
+  .brand small { display: block; font-family: var(--mono); font-size: 0.62rem; color: var(--muted); font-weight: 400; letter-spacing: 0.05em; }
+
+  .topbar-right { display: flex; gap: 0.7rem; align-items: center; }
+  .view-toggle {
+    display: flex; gap: 2px; padding: 3px;
+    background: var(--panel); border: 1px solid var(--line-2); border-radius: 8px;
+  }
+  .view-toggle button {
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+    background: transparent; border: none; color: var(--muted); cursor: pointer;
+    padding: 0.35rem 0.7rem; border-radius: 5px;
+    transition: all 0.18s;
+  }
+  .view-toggle button.on {
+    background: var(--panel-2); color: var(--text);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .topbar-cta {
+    padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 500;
+    background: var(--text); color: var(--bg); text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .topbar-cta:hover { transform: translateY(-1px); }
+
+  /* ── universe (canvas) ── */
+  .universe-wrap {
+    position: fixed; inset: 0; z-index: 5;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+  }
+  .universe-wrap.dragging { cursor: grabbing; }
+  .universe-wrap.dragging * { user-select: none; }
+
+  .universe {
+    position: absolute; left: 50%; top: 50%;
+    width: 2400px; height: 1700px;
+    transform-origin: 0 0;
+    transition: none;
+  }
+  .universe.smooth { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+  /* ── edges (SVG) ── */
+  .edges {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .edge {
+    fill: none; stroke-width: 1; stroke: rgba(129,140,248,0.18);
+    stroke-dasharray: 3 5;
+    animation: flow 30s linear infinite;
+  }
+  .edge.bright { stroke: rgba(94,234,212,0.45); stroke-width: 1.3; }
+  @keyframes flow { to { stroke-dashoffset: -80; } }
+
+  /* ── node ── */
+  .node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    text-align: center;
+    pointer-events: auto;
+  }
+  .node-orb {
+    margin: 0 auto;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    position: relative;
+    display: grid; place-items: center;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+  }
+  .node-orb::before {
+    content: ''; position: absolute; inset: -8px;
+    border-radius: 50%;
+    border: 1px solid currentColor; opacity: 0.25;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .node-orb::after {
+    content: ''; position: absolute; inset: 6px;
+    border-radius: 50%;
+    background: var(--bg-2);
+  }
+  .node-glyph {
+    position: relative; z-index: 1;
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 600;
+    color: var(--text); letter-spacing: 0.04em;
+  }
+  .node-label {
+    margin-top: 0.7rem;
+    font-weight: 600; font-size: 0.88rem; letter-spacing: -0.01em;
+    line-height: 1.25; color: var(--text-2);
+    max-width: 160px;
+    margin-left: auto; margin-right: auto;
+  }
+  .node-sub {
+    font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+    margin-top: 0.25rem; letter-spacing: 0.05em;
+  }
+
+  .node:hover .node-orb { transform: scale(1.1); box-shadow: 0 0 32px -4px currentColor; }
+  .node:hover .node-orb::before { opacity: 0.6; transform: scale(1.05); }
+
+  /* node type colors */
+  .node.identity   { color: #fff; }
+  .node.identity .node-orb {
+    width: 130px; height: 130px;
+    background: conic-gradient(from 0deg, var(--teal), var(--indigo), var(--violet), var(--amber), var(--teal));
+    box-shadow: 0 0 60px -10px rgba(129,140,248,0.55), 0 0 100px -20px rgba(192,132,252,0.4);
+    animation: spinSlow 18s linear infinite;
+  }
+  @keyframes spinSlow { to { transform: rotate(360deg); } }
+  .node.identity .node-orb::after { inset: 10px; }
+  .node.identity .node-glyph { font-family: var(--serif); font-style: italic; font-size: 1.6rem; font-weight: 400; }
+  .node.identity .node-label { font-size: 1rem; color: var(--text); }
+  .node.identity:hover .node-orb { transform: scale(1.06); animation-play-state: running; }
+
+  .node.work    { color: var(--indigo); }
+  .node.project { color: var(--teal); }
+  .node.theme   { color: var(--violet); }
+  .node.princ   { color: var(--amber); }
+  .node.voice   { color: var(--rose); }
+  .node.contact { color: var(--emerald); }
+
+  .node.work .node-orb    { background: radial-gradient(circle at 35% 30%, rgba(129,140,248,0.5), rgba(129,140,248,0.05) 70%); }
+  .node.project .node-orb { background: radial-gradient(circle at 35% 30%, rgba(94,234,212,0.5),  rgba(94,234,212,0.05) 70%); }
+  .node.theme .node-orb   { background: radial-gradient(circle at 35% 30%, rgba(192,132,252,0.5), rgba(192,132,252,0.05) 70%); }
+  .node.princ .node-orb   { background: radial-gradient(circle at 35% 30%, rgba(251,191,36,0.5),  rgba(251,191,36,0.05) 70%); }
+  .node.voice .node-orb   { background: radial-gradient(circle at 35% 30%, rgba(251,113,133,0.5), rgba(251,113,133,0.05) 70%); }
+  .node.contact .node-orb { background: radial-gradient(circle at 35% 30%, rgba(52,211,153,0.55), rgba(52,211,153,0.05) 70%); }
+
+  /* tag pip */
+  .node-type {
+    position: absolute; top: -2px; left: 50%;
+    transform: translate(-50%, -100%);
+    font-family: var(--mono); font-size: 0.58rem; color: var(--muted-2);
+    letter-spacing: 0.1em; white-space: nowrap;
+  }
+
+  /* ── HUD elements ── */
+  .hud-onboard {
+    position: fixed; top: 90px; left: 50%; transform: translateX(-50%);
+    z-index: 15;
+    padding: 0.7rem 1.2rem;
+    background: rgba(13,17,28,0.85); border: 1px solid var(--line-2);
+    border-radius: 999px;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    font-family: var(--mono); font-size: 0.74rem;
+    color: var(--text-2); letter-spacing: 0.03em;
+    display: flex; align-items: center; gap: 1rem;
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .hud-onboard.fade { opacity: 0; transform: translateX(-50%) translateY(-8px); pointer-events: none; }
+  .hud-onboard b { color: var(--teal); font-weight: 600; }
+  .hud-onboard kbd {
+    font-family: var(--mono); font-size: 0.68rem;
+    padding: 0.1rem 0.4rem; border-radius: 4px;
+    background: var(--panel-2); border: 1px solid var(--line-2); color: var(--text);
+  }
+
+  .controls {
+    position: fixed; bottom: 24px; left: 24px; z-index: 15;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .ctrl-btn {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: rgba(13,17,28,0.85); border: 1px solid var(--line-2);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    color: var(--text-2); cursor: pointer;
+    display: grid; place-items: center; font-size: 1.1rem;
+    font-family: var(--mono);
+    transition: all 0.18s;
+  }
+  .ctrl-btn:hover { color: var(--text); border-color: var(--indigo); }
+
+  .zoom-readout {
+    font-family: var(--mono); font-size: 0.66rem; color: var(--muted);
+    text-align: center; margin-top: 4px; letter-spacing: 0.04em;
+  }
+
+  /* mini-map */
+  .minimap {
+    position: fixed; bottom: 24px; right: 24px; z-index: 15;
+    width: 160px; height: 110px;
+    background: rgba(13,17,28,0.7); border: 1px solid var(--line-2); border-radius: 9px;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+  }
+  .mm-canvas {
+    position: relative; width: 100%; height: 100%;
+  }
+  .mm-dot {
+    position: absolute; width: 4px; height: 4px; border-radius: 50%;
+    background: var(--muted); transform: translate(-50%, -50%);
+  }
+  .mm-dot.identity { width: 6px; height: 6px; background: var(--text); box-shadow: 0 0 6px var(--indigo); }
+  .mm-dot.work    { background: var(--indigo); }
+  .mm-dot.project { background: var(--teal); }
+  .mm-dot.theme   { background: var(--violet); }
+  .mm-dot.princ   { background: var(--amber); }
+  .mm-dot.voice   { background: var(--rose); }
+  .mm-dot.contact { background: var(--emerald); }
+  .mm-vp {
+    position: absolute; border: 1px solid var(--text);
+    background: rgba(255,255,255,0.06);
+    pointer-events: none;
+  }
+  .minimap-label {
+    position: absolute; top: 6px; left: 8px;
+    font-family: var(--mono); font-size: 0.58rem; color: var(--muted-2);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  /* legend */
+  .legend {
+    position: fixed; top: 90px; left: 24px; z-index: 15;
+    padding: 0.7rem 0.85rem;
+    background: rgba(13,17,28,0.7); border: 1px solid var(--line);
+    border-radius: 9px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    font-family: var(--mono); font-size: 0.66rem; color: var(--muted);
+    display: flex; flex-direction: column; gap: 0.35rem; letter-spacing: 0.04em;
+  }
+  .legend-row { display: flex; align-items: center; gap: 0.5rem; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ── detail panel (slide-in) ── */
+  .panel {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 25;
+    width: min(420px, 92vw);
+    background: var(--panel); border-left: 1px solid var(--line-2);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: -30px 0 80px -30px rgba(0,0,0,0.6);
+  }
+  .panel.open { transform: translateX(0); }
+  .panel-head {
+    padding: 1.2rem 1.4rem 1rem;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; background: var(--panel); z-index: 1;
+  }
+  .panel-eyebrow {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+    color: var(--teal); text-transform: uppercase;
+  }
+  .panel-close {
+    background: transparent; border: 1px solid var(--line-2);
+    color: var(--muted); width: 30px; height: 30px; border-radius: 7px;
+    cursor: pointer; display: grid; place-items: center;
+    transition: all 0.2s;
+  }
+  .panel-close:hover { color: var(--text); border-color: var(--text); }
+  .panel-body { padding: 1.5rem 1.4rem 4rem; }
+  .panel-title {
+    font-weight: 600; letter-spacing: -0.02em;
+    font-size: 1.6rem; line-height: 1.15;
+    margin-bottom: 0.6rem;
+  }
+  .panel-meta {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+    margin-bottom: 1.4rem; letter-spacing: 0.04em;
+  }
+  .panel-text {
+    color: var(--text-2); font-size: 0.92rem; line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+  .panel-text strong { color: var(--text); font-weight: 600; }
+  .panel-list { list-style: none; margin-bottom: 1.5rem; }
+  .panel-list li {
+    position: relative; padding-left: 1.3rem; margin-bottom: 0.55rem;
+    font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+  }
+  .panel-list li::before {
+    content: ''; position: absolute; left: 0.2rem; top: 0.55em;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
+  }
+  .panel-list li b { color: var(--text-2); font-weight: 500; }
+  .panel-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .panel-chip {
+    font-family: var(--mono); font-size: 0.66rem;
+    padding: 0.25rem 0.6rem; border-radius: 6px;
+    background: var(--panel-2); color: var(--text-2); border: 1px solid var(--line-2);
+  }
+  .panel-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-top: 0.5rem;
+    padding: 0.55rem 1rem; border-radius: 8px;
+    background: linear-gradient(120deg, var(--teal), var(--indigo));
+    color: #07090f; text-decoration: none;
+    font-size: 0.82rem; font-weight: 600;
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .panel-link:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -8px rgba(94,234,212,0.5); }
+  .panel-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .panel-actions .panel-link.ghost {
+    background: transparent; color: var(--text-2);
+    border: 1px solid var(--line-2);
+  }
+  .panel-actions .panel-link.ghost:hover { border-color: var(--text); color: var(--text); box-shadow: none; }
+
+  .panel-related {
+    margin-top: 1rem; padding-top: 1.2rem; border-top: 1px dashed var(--line);
+  }
+  .panel-related-lbl {
+    font-family: var(--mono); font-size: 0.66rem; color: var(--muted);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.7rem;
+  }
+  .related-chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.78rem; color: var(--text-2);
+    background: var(--panel-2); border: 1px solid var(--line-2);
+    border-radius: 999px; padding: 0.32rem 0.85rem;
+    cursor: pointer; transition: all 0.2s;
+    margin: 0 0.3rem 0.3rem 0;
+  }
+  .related-chip:hover { border-color: var(--teal); color: var(--text); }
+  .related-chip .swatch {
+    width: 7px; height: 7px; border-radius: 50%;
+  }
+
+  /* ── list view (alt mode) ── */
+  .listview {
+    position: fixed; inset: 0; z-index: 8;
+    overflow-y: auto;
+    padding: 6rem 1.4rem 4rem;
+    background: var(--bg);
+    display: none;
+  }
+  .listview.on { display: block; }
+  .lv-wrap { max-width: 720px; margin: 0 auto; }
+  .lv-eyebrow {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--teal);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .lv-h1 {
+    font-weight: 500; letter-spacing: -0.03em;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.1;
+    margin-bottom: 2.4rem;
+  }
+  .lv-h1 em {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    background: linear-gradient(120deg, var(--teal), var(--indigo));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lv-group { margin-bottom: 2.5rem; }
+  .lv-group-h {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .lv-group-h .swatch { width: 8px; height: 8px; border-radius: 50%; }
+  .lv-card {
+    padding: 1rem 1.2rem; border: 1px solid var(--line);
+    border-radius: 10px; background: var(--panel);
+    margin-bottom: 0.5rem; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .lv-card:hover { border-color: var(--line-2); background: var(--panel-2); }
+  .lv-card-title { font-weight: 600; font-size: 0.98rem; margin-bottom: 0.2rem; }
+  .lv-card-sub { font-size: 0.84rem; color: var(--muted); }
+
+  /* ── preview switcher ── */
+  .preview-switch {
+    position: fixed; top: 76px; right: 200px; z-index: 25;
+    display: flex; gap: 0.25rem; padding: 0.35rem;
+    background: rgba(13,17,28,0.85); backdrop-filter: blur(14px);
+    border: 1px solid var(--line-2); border-radius: 999px;
+    font-size: 0.66rem;
+  }
+  .preview-switch a { padding: 0.4rem 0.7rem; color: var(--muted); text-decoration: none; border-radius: 999px; transition: all 0.2s; }
+  .preview-switch a:hover { color: var(--text); }
+  .preview-switch a.active {
+    background: linear-gradient(120deg, var(--teal), var(--indigo));
+    color: #04050b; font-weight: 600;
+  }
+
+  @media (max-width: 820px) {
+    .legend { display: none; }
+    .minimap { width: 110px; height: 80px; bottom: 12px; right: 12px; }
+    .controls { bottom: 12px; left: 12px; }
+    .hud-onboard { font-size: 0.66rem; padding: 0.5rem 0.9rem; gap: 0.6rem; top: 80px; }
+    .preview-switch { top: auto; bottom: 12px; right: 130px; }
+    .topbar { padding: 0.7rem 1rem; }
+    .brand small { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+    .universe.smooth { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" aria-hidden="true"></div>
+<div class="nebula" aria-hidden="true"></div>
+
+<!-- ── TOPBAR ── -->
+<header class="topbar">
+  <div class="brand">
+    <span class="orb-sm"></span>
+    <span>Priyanka Das<small>CONSTELLATION · SPATIAL PORTFOLIO</small></span>
+  </div>
+  <div class="topbar-right">
+    <div class="view-toggle" role="tablist" aria-label="View mode">
+      <button class="on" data-view="map">◯ Map</button>
+      <button data-view="list">≡ List</button>
+    </div>
+    <a href="mailto:hello.priyankapm@gmail.com" class="topbar-cta">Hire me →</a>
+  </div>
+</header>
+
+<!-- ── PREVIEW SWITCHER ── -->
+<div class="preview-switch">
+  <a href="index.html">Live</a>
+  <a href="preview.html">P1</a>
+  <a href="preview2.html">P2</a>
+  <a href="preview3.html">P3</a>
+  <a href="preview4.html">P4</a>
+  <a href="preview5.html">P5</a>
+  <a href="preview6.html" class="active">P6</a>
+</div>
+
+<!-- ── ONBOARDING ── -->
+<div class="hud-onboard" id="onboard">
+  <span><b>Drag</b> to pan</span>
+  <span><b>Scroll</b> or <kbd>+ −</kbd> to zoom</span>
+  <span><b>Click</b> any node</span>
+</div>
+
+<!-- ── LEGEND ── -->
+<div class="legend" aria-hidden="true">
+  <div class="legend-row"><span class="legend-dot" style="background:#fff"></span>IDENTITY</div>
+  <div class="legend-row"><span class="legend-dot" style="background:#818cf8"></span>WORK</div>
+  <div class="legend-row"><span class="legend-dot" style="background:#5eead4"></span>PROJECTS</div>
+  <div class="legend-row"><span class="legend-dot" style="background:#c084fc"></span>THEMES</div>
+  <div class="legend-row"><span class="legend-dot" style="background:#fbbf24"></span>PRINCIPLES</div>
+  <div class="legend-row"><span class="legend-dot" style="background:#fb7185"></span>VOICES</div>
+  <div class="legend-row"><span class="legend-dot" style="background:#34d399"></span>CONTACT</div>
+</div>
+
+<!-- ── CONTROLS ── -->
+<div class="controls">
+  <button class="ctrl-btn" id="zoomIn" aria-label="Zoom in">+</button>
+  <button class="ctrl-btn" id="zoomOut" aria-label="Zoom out">−</button>
+  <button class="ctrl-btn" id="reset" aria-label="Reset view" style="font-size:0.7rem">⌂</button>
+  <div class="zoom-readout" id="zoomReadout">100%</div>
+</div>
+
+<!-- ── MINIMAP ── -->
+<div class="minimap">
+  <div class="minimap-label">MAP</div>
+  <div class="mm-canvas" id="minimap">
+    <div class="mm-vp" id="mmVp"></div>
+  </div>
+</div>
+
+<!-- ── UNIVERSE ── -->
+<div class="universe-wrap" id="wrap">
+  <div class="universe" id="universe">
+    <svg class="edges" id="edges" viewBox="0 0 2400 1700" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div id="nodes"></div>
+  </div>
+</div>
+
+<!-- ── DETAIL PANEL ── -->
+<aside class="panel" id="panel" aria-label="Node details">
+  <div class="panel-head">
+    <span class="panel-eyebrow" id="panelEyebrow">—</span>
+    <button class="panel-close" id="panelClose" aria-label="Close">✕</button>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+</aside>
+
+<!-- ── LIST VIEW (alt) ── -->
+<div class="listview" id="listview" aria-hidden="true"></div>
+
+<script>
+// ════════════════════════════════════════════════
+//  CONSTELLATION DATA
+// ════════════════════════════════════════════════
+const NODES = [
+  { id:'me', type:'identity', x:1200, y:850, glyph:'P', label:'Priyanka Das', sub:'Senior PM · Business Architect',
+    eyebrow:'IDENTITY · OPERATOR',
+    title:'Priyanka Das',
+    meta:'Stockholm · Available now',
+    text:'Senior Product Manager & Business Architect with <strong>9 years</strong> across banking, public sector, insurance and transport. Owns discovery → roadmap → delivery → adoption, and specialises in <strong>AI-driven decisioning and agentic systems</strong>.',
+    chips:['Senior PM','Business Architect','AI Builder','Available now'],
+    actions:[{label:'Open a channel ↗', href:'mailto:hello.priyankapm@gmail.com', primary:true}, {label:'LinkedIn ↗', href:'https://www.linkedin.com/in/pmpriyanka/', target:'_blank'}],
+    related:['cap','prepos','ai','contact'] },
+
+  // WORK
+  { id:'cap', type:'work', x:520, y:520, glyph:'CG', label:'Capgemini Sverige', sub:'2021 → now',
+    eyebrow:'WORK · CURRENT',
+    title:'Capgemini Sverige AB',
+    meta:'Senior Consultant · Business Architect · Stockholm',
+    text:'Embedded PM/PO across client engagements — discovery, roadmap, backlog, delivery, adoption — within a consulting structure. Leads AI-driven initiatives across retention and digital transformation.',
+    list:[
+      '<b>~80% reduction in claim processing time</b> for an EU insurance client.',
+      'Led AI initiatives — <b>Pega GenAI</b>, AI Agent design, agentic AI in production.',
+      'Defined decisioning strategies, business rules and intelligent automation aligned with <b>next-best-action principles</b>.',
+      'Aligned <b>26 stakeholder funds</b> on a single roadmap inside SAFe Agile.'
+    ],
+    chips:['Nordic Banking','Public Sector','EU Insurance','Transport & Logistics','SAFe Agile'],
+    related:['ai','nba','pega','testimonials'] },
+
+  { id:'insta', type:'work', x:380, y:880, glyph:'IS', label:'Instasmart', sub:'2019 → 2021',
+    eyebrow:'WORK · 2019 – 2021',
+    title:'Instasmart (Truviq)',
+    meta:'Workflow Automation Developer · India',
+    text:'Built workflow-driven platforms supporting <strong>large-scale vendor management including Amazon</strong>.',
+    list:[
+      'Translated requirements into case types, SLAs and decision logic for scalable <b>vendor onboarding automation</b>.',
+      'Designed workflow interactions and UI components to improve adoption.',
+      'Produced user stories and acceptance criteria, reducing rework.'
+    ],
+    chips:['Vendor Management','E-commerce','Workflow Automation','Agile'],
+    related:['cap','hdfc'] },
+
+  { id:'hdfc', type:'work', x:440, y:1230, glyph:'HB', label:'HDFC Bank', sub:'2016 → 2019',
+    eyebrow:'WORK · 2016 – 2019',
+    title:'HDFC Bank Ltd',
+    meta:'QA Tester — Corporate Banking · India',
+    text:'Test design + automation across enterprise banking platforms in a <strong>highly regulated environment</strong>.',
+    list:[
+      'Designed test scenarios aligned with real-world banking workflows.',
+      'Drove <b>UiPath RPA</b> automation initiatives, catching defects early.',
+      'Identified edge cases, reducing downstream production issues.'
+    ],
+    chips:['Enterprise Banking','UiPath RPA','Regulated','Test Automation'],
+    related:['insta','pega'] },
+
+  // PROJECTS
+  { id:'prepos', type:'project', x:1900, y:430, glyph:'P!', label:'PrepOS', sub:'Live · 2026',
+    eyebrow:'PROJECT · LIVE',
+    title:'PrepOS — Adaptive PM Interview Coach',
+    meta:'Founder · PM · Engineer · pmprepos.com',
+    text:'A fully client-side adaptive PM interview coach. A 30-second calibration wizard picks the next rep from a <strong>250-question library</strong> mapped to 18 PM concepts; a 5-mode coaching ladder scales scaffolding to demonstrated mastery; a voice mock simulator uses BYO-key Claude or ChatGPT.',
+    list:[
+      '<b>250 reviewed questions</b> across 6 PM round types',
+      '<b>18 PM concepts</b> with mastery memory + spaced repetition',
+      '6 calibrated tracks — APM · PM · Senior · Staff · AI PM · PM-T',
+      'Weekly shipping cadence; live at <b>pmprepos.com</b>'
+    ],
+    chips:['Next.js 15','React 19','TypeScript','Anthropic Claude','OpenAI','ElevenLabs','Adaptive Learning'],
+    actions:[{label:'Try the live app ↗', href:'https://pmprepos.com', target:'_blank', primary:true}, {label:'GitHub ↗', href:'https://github.com/hellopriyankapm-dotcom/PM-Interview-PrepOS', target:'_blank'}],
+    related:['ai','svensk','me'] },
+
+  { id:'nba', type:'project', x:1820, y:830, glyph:'➤', label:'NBA Retention', sub:'Case Study',
+    eyebrow:'PROJECT · CASE STUDY',
+    title:'NBA Retention — Nordic Banking',
+    meta:'Business Architect · embedded PM',
+    text:'Next-best-action decisioning, AI-agent flows and offer logic for a Nordic retail bank. <strong>Reached 1.2M users</strong>; contributed to ~80% claim-time reduction across linked workstreams.',
+    list:[
+      '<b>1.2M users</b> served',
+      '<b>~80% claim-time reduction</b> (linked workstream)',
+      'Designed transparent decisioning + fatigue guardrails',
+      'A/B-validated before scaling to channel'
+    ],
+    chips:['NBA Decisioning','Pega','AI Agents','A/B Testing','Retention'],
+    related:['cap','pega','ai'] },
+
+  { id:'svensk', type:'project', x:1840, y:1190, glyph:'S', label:'SvenskReady', sub:'0 → 1',
+    eyebrow:'PROJECT · 0 → 1',
+    title:'SvenskReady — Citizenship Prep',
+    meta:'Side project · 0 → 1 PM',
+    text:'Owned the full <strong>0 → 1 product lifecycle</strong> — user research, PRD creation, feature definition, user journey design and interactive prototyping. Adaptive learning, gamification and AI-accelerated content.',
+    list:[
+      'Full PRD ownership',
+      'Adaptive learning flows + gamification framework',
+      'AI content pipeline scoped',
+      '0→1 lifecycle completed'
+    ],
+    chips:['AI Product Strategy','PRD Writing','Figma','User Research','Gamification'],
+    related:['prepos','me'] },
+
+  // THEMES
+  { id:'ai', type:'theme', x:1200, y:330, glyph:'◎', label:'AI & Agentic', sub:'specialism',
+    eyebrow:'THEME · SPECIALISM',
+    title:'AI &amp; Agentic Systems',
+    meta:'Pega GenAI · Anthropic · OpenAI · ElevenLabs',
+    text:'From discovery of <strong>where AI actually creates value</strong> to defining agentic workflows, decisioning, and human-in-the-loop guardrails. Comfortable scoping what to build — and what not to.',
+    chips:['Pega GenAI','AI Agent Design','Agentic Systems','LLM Integration','Voice AI','Explainability'],
+    related:['cap','prepos','nba'] },
+
+  { id:'pega', type:'theme', x:820, y:730, glyph:'⌬', label:'Pega', sub:'platform depth',
+    eyebrow:'THEME · PLATFORM',
+    title:'Pega (deep)',
+    meta:'Decisioning · GenAI · Constellation',
+    text:'Hands-on Pega across decisioning, GenAI, business rules, agent design and Constellation UIs — endorsed by senior Pega architects in her LinkedIn recommendations.',
+    chips:['Pega Decisioning','Pega GenAI','Constellation','Theme-Cosmos','Business Rules'],
+    related:['cap','nba','testimonials'] },
+
+  // PRINCIPLES
+  { id:'p1', type:'princ', x:820, y:1280, glyph:'01', label:'Outcomes > Outputs', sub:'principle',
+    eyebrow:'PRINCIPLE · 01',
+    title:'Outcomes over outputs',
+    meta:'How she measures progress',
+    text:'Success = <strong>behaviour change</strong>, not tickets closed. Before any PRD: what shifts if we build this, and how will we know?',
+    chips:['Outcomes','Behaviour Metrics','Before-and-after','Hypothesis-driven'],
+    related:['p2','p3'] },
+
+  { id:'p2', type:'princ', x:1200, y:1370, glyph:'02', label:'Data-informed', sub:'principle',
+    eyebrow:'PRINCIPLE · 02',
+    title:'Data-informed, not data-driven',
+    meta:'How she validates',
+    text:'Numbers say <strong>what</strong>; discovery says <strong>why</strong>. Pairs agent and caseworker interviews with A/B rigour before scaling.',
+    chips:['Discovery','A/B Testing','Investigate > Default'],
+    related:['p1','p3'] },
+
+  { id:'p3', type:'princ', x:1580, y:1280, glyph:'03', label:'Structured Ambiguity', sub:'principle',
+    eyebrow:'PRINCIPLE · 03',
+    title:'Structured under ambiguity',
+    meta:'How she prioritises',
+    text:'RICE prioritisation + workshops across <strong>26 funds</strong>, documented trade-offs — every decision auditable and reversible.',
+    chips:['RICE','Workshops','Trade-off Docs','Reversible'],
+    related:['p1','p2'] },
+
+  // VOICES
+  { id:'testimonials', type:'voice', x:140, y:760, glyph:'❝', label:'Voices', sub:'recommendations',
+    eyebrow:'VOICES · RECOMMENDATIONS',
+    title:'What colleagues say',
+    meta:'LinkedIn recommendations',
+    text:'<strong>Chris Bizimana</strong> — "Priyanka naturally brings a strong product mindset… the strategic mindset and technical depth required to excel in Business Architecture or Product Leadership roles."<br><br><strong>Manjunath Tanga</strong> — "Transforms complex business requirements into practical, high-quality solutions. Strong technical expertise combined with clear understanding of business needs."',
+    chips:['Product Mindset','Strategic Thinking','Technical Depth','Stakeholder Alignment'],
+    actions:[{label:'See all on LinkedIn ↗', href:'https://www.linkedin.com/in/pmpriyanka/details/recommendations/', target:'_blank', primary:true}],
+    related:['cap','pega','me'] },
+
+  // CONTACT
+  { id:'contact', type:'contact', x:1200, y:1610, glyph:'✦', label:'Open a Channel', sub:'available now',
+    eyebrow:'CONTACT · AVAILABLE NOW',
+    title:'Let’s build something worth shipping',
+    meta:'Stockholm · worldwide remote',
+    text:'Open to <strong>Senior PM / PO / AI Builder PM</strong> roles — available immediately for the next project.',
+    actions:[
+      {label:'✉ hello.priyankapm@gmail.com', href:'mailto:hello.priyankapm@gmail.com', primary:true},
+      {label:'↗ LinkedIn', href:'https://www.linkedin.com/in/pmpriyanka/', target:'_blank'},
+      {label:'💬 WhatsApp', href:'https://wa.me/46737810307', target:'_blank'}
+    ],
+    related:['me'] },
+];
+
+const EDGES = [
+  ['me','cap', true], ['me','prepos', true], ['me','ai', true], ['me','contact', true],
+  ['me','insta'], ['me','hdfc'], ['me','nba'], ['me','svensk'], ['me','testimonials'],
+  ['me','p1'], ['me','p2'], ['me','p3'], ['me','pega'],
+  ['ai','prepos'], ['ai','nba'], ['ai','cap'],
+  ['pega','cap'], ['pega','hdfc'], ['pega','nba'],
+  ['cap','testimonials'],
+  ['p1','p2'], ['p2','p3'],
+  ['prepos','svensk'],
+];
+
+const TYPE_COLOR = {
+  identity:'#fff', work:'#818cf8', project:'#5eead4',
+  theme:'#c084fc', princ:'#fbbf24', voice:'#fb7185', contact:'#34d399'
+};
+const TYPE_LABEL = {
+  identity:'IDENTITY', work:'WORK', project:'PROJECT',
+  theme:'THEME', princ:'PRINCIPLE', voice:'VOICES', contact:'CONTACT'
+};
+
+const NODE_MAP = Object.fromEntries(NODES.map(n => [n.id, n]));
+
+// ════════════════════════════════════════════════
+//  RENDER NODES + EDGES
+// ════════════════════════════════════════════════
+const universe = document.getElementById('universe');
+const nodesLayer = document.getElementById('nodes');
+const edgesSvg = document.getElementById('edges');
+
+NODES.forEach(n => {
+  const el = document.createElement('div');
+  el.className = `node ${n.type}`;
+  el.style.left = n.x + 'px';
+  el.style.top  = n.y + 'px';
+  el.dataset.id = n.id;
+  el.innerHTML = `
+    <div class="node-type">${TYPE_LABEL[n.type]}</div>
+    <div class="node-orb"><span class="node-glyph">${n.glyph}</span></div>
+    <div class="node-label">${n.label}</div>
+    ${n.sub ? `<div class="node-sub">${n.sub}</div>` : ''}
+  `;
+  el.addEventListener('click', (e) => {
+    if (didDrag) return; // suppress click-after-drag
+    e.stopPropagation();
+    openPanel(n.id);
+  });
+  nodesLayer.appendChild(el);
+});
+
+EDGES.forEach(([a, b, bright]) => {
+  const A = NODE_MAP[a], B = NODE_MAP[b];
+  if (!A || !B) return;
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  line.setAttribute('x1', A.x); line.setAttribute('y1', A.y);
+  line.setAttribute('x2', B.x); line.setAttribute('y2', B.y);
+  line.setAttribute('class', 'edge' + (bright ? ' bright' : ''));
+  edgesSvg.appendChild(line);
+});
+
+// ════════════════════════════════════════════════
+//  PAN + ZOOM
+// ════════════════════════════════════════════════
+const wrap = document.getElementById('wrap');
+const zoomReadout = document.getElementById('zoomReadout');
+let tx = 0, ty = 0, sc = 1;
+let panning = false, startX = 0, startY = 0, startTx = 0, startTy = 0;
+let didDrag = false;
+const MIN_SC = 0.35, MAX_SC = 1.6;
+
+function applyTransform(smooth = false) {
+  universe.classList.toggle('smooth', smooth);
+  universe.style.transform = `translate(${tx}px, ${ty}px) scale(${sc})`;
+  zoomReadout.textContent = Math.round(sc * 100) + '%';
+  updateMinimap();
+}
+
+function centerOn(x, y, targetScale = sc, smooth = true) {
+  sc = Math.max(MIN_SC, Math.min(MAX_SC, targetScale));
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+  // universe is positioned at 50%/50% then transform applied from 0,0 origin
+  // we want world point (x, y) at viewport center → screen offset = wrapCenter - originOffset - x*sc
+  const originX = window.innerWidth / 2;
+  const originY = window.innerHeight / 2;
+  tx = cx - originX - x * sc;
+  ty = cy - originY - y * sc;
+  applyTransform(smooth);
+}
+
+function initialView() {
+  // start centered on identity
+  const me = NODE_MAP['me'];
+  centerOn(me.x, me.y, window.innerWidth < 700 ? 0.5 : 0.7, false);
+}
+initialView();
+window.addEventListener('resize', () => centerOn(/* keep visible center roughly */ NODE_MAP['me'].x, NODE_MAP['me'].y, sc, false));
+
+// mouse drag
+wrap.addEventListener('mousedown', (e) => {
+  if (e.target.closest('.node, .panel, .topbar, .controls, .minimap, .preview-switch, .legend')) return;
+  panning = true; didDrag = false;
+  startX = e.clientX; startY = e.clientY;
+  startTx = tx; startTy = ty;
+  wrap.classList.add('dragging');
+});
+window.addEventListener('mousemove', (e) => {
+  if (!panning) return;
+  const dx = e.clientX - startX, dy = e.clientY - startY;
+  if (Math.abs(dx) + Math.abs(dy) > 4) didDrag = true;
+  tx = startTx + dx; ty = startTy + dy;
+  applyTransform(false);
+});
+window.addEventListener('mouseup', () => {
+  panning = false; wrap.classList.remove('dragging');
+  setTimeout(() => didDrag = false, 50);
+});
+
+// wheel zoom (toward cursor)
+wrap.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const oldSc = sc;
+  const factor = e.deltaY > 0 ? 0.9 : 1.1;
+  sc = Math.max(MIN_SC, Math.min(MAX_SC, sc * factor));
+  if (sc !== oldSc) {
+    const r = wrap.getBoundingClientRect();
+    const px = e.clientX - r.left, py = e.clientY - r.top;
+    const originX = window.innerWidth / 2, originY = window.innerHeight / 2;
+    // world point under cursor: (px - originX - tx) / oldSc
+    const wx = (px - originX - tx) / oldSc;
+    const wy = (py - originY - ty) / oldSc;
+    tx = px - originX - wx * sc;
+    ty = py - originY - wy * sc;
+    applyTransform(false);
+  }
+}, { passive: false });
+
+// touch — single-finger pan, two-finger pinch
+let touchMode = null, t0 = null, t1 = null, pinchDist = 0, pinchScale = 1, pinchMid = null;
+wrap.addEventListener('touchstart', (e) => {
+  if (e.target.closest('.node, .panel, .topbar, .controls, .minimap, .preview-switch')) return;
+  if (e.touches.length === 1) {
+    touchMode = 'pan';
+    t0 = e.touches[0];
+    startX = t0.clientX; startY = t0.clientY;
+    startTx = tx; startTy = ty;
+    didDrag = false;
+  } else if (e.touches.length === 2) {
+    touchMode = 'pinch';
+    t0 = e.touches[0]; t1 = e.touches[1];
+    pinchDist = Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
+    pinchScale = sc;
+    pinchMid = { x: (t0.clientX + t1.clientX)/2, y: (t0.clientY + t1.clientY)/2 };
+  }
+}, { passive: false });
+wrap.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  if (touchMode === 'pan' && e.touches.length === 1) {
+    const t = e.touches[0];
+    const dx = t.clientX - startX, dy = t.clientY - startY;
+    if (Math.abs(dx) + Math.abs(dy) > 4) didDrag = true;
+    tx = startTx + dx; ty = startTy + dy;
+    applyTransform(false);
+  } else if (touchMode === 'pinch' && e.touches.length === 2) {
+    const a = e.touches[0], b = e.touches[1];
+    const dist = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
+    const newSc = Math.max(MIN_SC, Math.min(MAX_SC, pinchScale * (dist / pinchDist)));
+    const r = wrap.getBoundingClientRect();
+    const px = pinchMid.x - r.left, py = pinchMid.y - r.top;
+    const originX = window.innerWidth / 2, originY = window.innerHeight / 2;
+    const wx = (px - originX - tx) / sc;
+    const wy = (py - originY - ty) / sc;
+    sc = newSc;
+    tx = px - originX - wx * sc;
+    ty = py - originY - wy * sc;
+    applyTransform(false);
+  }
+}, { passive: false });
+wrap.addEventListener('touchend', () => {
+  touchMode = null;
+  setTimeout(() => didDrag = false, 50);
+});
+
+// zoom buttons
+document.getElementById('zoomIn').addEventListener('click', () => { sc = Math.min(MAX_SC, sc * 1.2); applyTransform(true); });
+document.getElementById('zoomOut').addEventListener('click', () => { sc = Math.max(MIN_SC, sc / 1.2); applyTransform(true); });
+document.getElementById('reset').addEventListener('click', () => centerOn(NODE_MAP['me'].x, NODE_MAP['me'].y, 0.7, true));
+
+// keyboard
+window.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === '+' || e.key === '=') { sc = Math.min(MAX_SC, sc * 1.2); applyTransform(true); }
+  if (e.key === '-' || e.key === '_') { sc = Math.max(MIN_SC, sc / 1.2); applyTransform(true); }
+  if (e.key === '0') centerOn(NODE_MAP['me'].x, NODE_MAP['me'].y, 0.7, true);
+  if (e.key === 'Escape') closePanel();
+});
+
+// ════════════════════════════════════════════════
+//  MINIMAP
+// ════════════════════════════════════════════════
+const mm = document.getElementById('minimap');
+const WORLD_W = 2400, WORLD_H = 1700;
+NODES.forEach(n => {
+  const dot = document.createElement('div');
+  dot.className = `mm-dot ${n.type}`;
+  dot.style.left = (n.x / WORLD_W * 100) + '%';
+  dot.style.top  = (n.y / WORLD_H * 100) + '%';
+  mm.appendChild(dot);
+});
+const mmVp = document.getElementById('mmVp');
+
+function updateMinimap() {
+  const mw = mm.clientWidth, mh = mm.clientHeight;
+  const originX = window.innerWidth / 2, originY = window.innerHeight / 2;
+  // viewport world coords: world point at viewport corner (0, 0)
+  // screen x = originX + tx + worldX * sc  →  worldX = (0 - originX - tx) / sc
+  const x0 = (-originX - tx) / sc;
+  const y0 = (-originY - ty) / sc;
+  const x1 = (window.innerWidth - originX - tx) / sc;
+  const y1 = (window.innerHeight - originY - ty) / sc;
+  mmVp.style.left   = Math.max(0, Math.min(100, (x0 / WORLD_W) * 100)) + '%';
+  mmVp.style.top    = Math.max(0, Math.min(100, (y0 / WORLD_H) * 100)) + '%';
+  mmVp.style.width  = Math.max(4, Math.min(100, ((x1 - x0) / WORLD_W) * 100)) + '%';
+  mmVp.style.height = Math.max(4, Math.min(100, ((y1 - y0) / WORLD_H) * 100)) + '%';
+}
+updateMinimap();
+
+// click on minimap to jump
+mm.addEventListener('click', (e) => {
+  const r = mm.getBoundingClientRect();
+  const wx = (e.clientX - r.left) / r.width * WORLD_W;
+  const wy = (e.clientY - r.top)  / r.height * WORLD_H;
+  centerOn(wx, wy, sc, true);
+});
+
+// ════════════════════════════════════════════════
+//  DETAIL PANEL
+// ════════════════════════════════════════════════
+const panel = document.getElementById('panel');
+const panelEyebrow = document.getElementById('panelEyebrow');
+const panelBody = document.getElementById('panelBody');
+const panelClose = document.getElementById('panelClose');
+
+function openPanel(id) {
+  const n = NODE_MAP[id];
+  if (!n) return;
+  panelEyebrow.textContent = n.eyebrow || TYPE_LABEL[n.type];
+  panelEyebrow.style.color = TYPE_COLOR[n.type];
+  let html = `<h2 class="panel-title">${n.title || n.label}</h2>`;
+  if (n.meta) html += `<div class="panel-meta">${n.meta}</div>`;
+  if (n.text) html += `<div class="panel-text">${n.text}</div>`;
+  if (n.list) html += `<ul class="panel-list">${n.list.map(li => `<li>${li}</li>`).join('')}</ul>`;
+  if (n.chips) html += `<div class="panel-chips">${n.chips.map(c => `<span class="panel-chip">${c}</span>`).join('')}</div>`;
+  if (n.actions && n.actions.length) {
+    html += `<div class="panel-actions">${n.actions.map(a =>
+      `<a class="panel-link ${a.primary ? '' : 'ghost'}" href="${a.href}"${a.target ? ` target="${a.target}" rel="noopener"` : ''}>${a.label}</a>`).join('')}</div>`;
+  }
+  if (n.related && n.related.length) {
+    html += `<div class="panel-related">
+      <div class="panel-related-lbl">related nodes</div>
+      ${n.related.map(rid => {
+        const r = NODE_MAP[rid]; if (!r) return '';
+        return `<button class="related-chip" data-jump="${rid}"><span class="swatch" style="background:${TYPE_COLOR[r.type]}"></span>${r.label}</button>`;
+      }).join('')}
+    </div>`;
+  }
+  panelBody.innerHTML = html;
+  panelBody.querySelectorAll('[data-jump]').forEach(b => {
+    b.addEventListener('click', () => {
+      const id = b.dataset.jump;
+      const t = NODE_MAP[id];
+      centerOn(t.x, t.y, Math.max(sc, 0.85), true);
+      setTimeout(() => openPanel(id), 360);
+    });
+  });
+  panel.classList.add('open');
+  // gently center the node
+  centerOn(n.x, n.y, Math.max(sc, 0.75), true);
+  // adjust pan so panel doesn't cover the node on desktop
+  if (window.innerWidth > 720) {
+    setTimeout(() => {
+      tx -= 110;
+      applyTransform(true);
+    }, 50);
+  }
+}
+
+function closePanel() { panel.classList.remove('open'); }
+panelClose.addEventListener('click', closePanel);
+
+// ════════════════════════════════════════════════
+//  ONBOARDING
+// ════════════════════════════════════════════════
+const onboard = document.getElementById('onboard');
+let onboarded = false;
+['mousedown','touchstart','wheel','keydown'].forEach(ev =>
+  window.addEventListener(ev, () => {
+    if (!onboarded) { onboard.classList.add('fade'); onboarded = true; }
+  }, { once: true })
+);
+setTimeout(() => onboard.classList.add('fade'), 7000);
+
+// ════════════════════════════════════════════════
+//  LIST VIEW
+// ════════════════════════════════════════════════
+const listview = document.getElementById('listview');
+function buildList() {
+  const groups = [
+    { type: 'identity', label: 'About' },
+    { type: 'work',     label: 'Work' },
+    { type: 'project',  label: 'Projects' },
+    { type: 'theme',    label: 'Themes & Specialisms' },
+    { type: 'princ',    label: 'Principles' },
+    { type: 'voice',    label: 'Voices' },
+    { type: 'contact',  label: 'Contact' },
+  ];
+  let html = `<div class="lv-wrap">
+    <div class="lv-eyebrow">SPATIAL PORTFOLIO · LIST VIEW</div>
+    <h1 class="lv-h1">Pick any <em>star.</em></h1>`;
+  for (const g of groups) {
+    const items = NODES.filter(n => n.type === g.type);
+    if (!items.length) continue;
+    html += `<div class="lv-group">
+      <div class="lv-group-h"><span class="swatch" style="background:${TYPE_COLOR[g.type]}"></span>${g.label}</div>`;
+    for (const n of items) {
+      html += `<div class="lv-card" data-id="${n.id}">
+        <div class="lv-card-title">${n.title || n.label}</div>
+        <div class="lv-card-sub">${n.meta || n.sub || ''}</div>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+  html += `</div>`;
+  listview.innerHTML = html;
+  listview.querySelectorAll('.lv-card').forEach(c =>
+    c.addEventListener('click', () => openPanel(c.dataset.id))
+  );
+}
+buildList();
+
+document.querySelectorAll('.view-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const isList = btn.dataset.view === 'list';
+    listview.classList.toggle('on', isList);
+    wrap.style.display = isList ? 'none' : '';
+    document.querySelector('.controls').style.display = isList ? 'none' : '';
+    document.querySelector('.minimap').style.display  = isList ? 'none' : '';
+    document.querySelector('.legend').style.display   = isList ? 'none' : '';
+    onboard.classList.toggle('fade', isList);
+  });
+});
+</script>
+</body>
+</html>
