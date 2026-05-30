@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Priyanka Das — Decision Studio (Preview 3)</title>
+<meta name="robots" content="noindex,nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:        #0a0b10;
+    --bg-2:      #0e1018;
+    --surface:   #14171f;
+    --surface-2: #1b1f2a;
+    --line:      #232734;
+    --line-2:    #2e3342;
+
+    --indigo:    #818cf8;
+    --indigo-d:  #4f46e5;
+    --emerald:   #34d399;
+    --emerald-d: #059669;
+    --amber:     #fbbf24;
+    --rose:      #fb7185;
+
+    --text:      #f4f5f8;
+    --text-2:    #c2c7d4;
+    --muted:     #8b91a3;
+    --muted-2:   #5c6171;
+
+    --serif:     'Instrument Serif', Georgia, serif;
+    --sans:      'Inter', system-ui, sans-serif;
+    --mono:      'JetBrains Mono', ui-monospace, monospace;
+
+    --r:         14px;
+    --r-sm:      9px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; background: var(--bg); }
+  body {
+    background:
+      radial-gradient(900px 500px at 85% -5%, rgba(129,140,248,0.10), transparent 65%),
+      radial-gradient(800px 600px at 10% 110%, rgba(52,211,153,0.06), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  ::selection { background: rgba(129,140,248,0.3); }
+
+  a { color: inherit; }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.9rem 1.6rem;
+    background: rgba(10,11,16,0.7);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-weight: 600; font-size: 0.92rem; letter-spacing: -0.01em;
+  }
+  .brand-mark {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--indigo), var(--indigo-d));
+    display: grid; place-items: center;
+    font-family: var(--serif); font-size: 1.1rem; color: #fff;
+    box-shadow: 0 4px 16px -4px rgba(79,70,229,0.6);
+  }
+  .brand-sub {
+    font-family: var(--mono); font-size: 0.66rem;
+    color: var(--muted); font-weight: 400; letter-spacing: 0.06em;
+  }
+  .topnav { display: flex; gap: 0.4rem; }
+  .topnav a {
+    font-size: 0.82rem; color: var(--muted);
+    text-decoration: none; padding: 0.4rem 0.85rem;
+    border-radius: 8px; transition: all 0.2s;
+  }
+  .topnav a:hover { color: var(--text); background: var(--surface); }
+  .topnav a.active { color: var(--indigo); }
+  .topbar-cta {
+    font-size: 0.82rem; font-weight: 500;
+    padding: 0.5rem 1.1rem; border-radius: 9px;
+    background: var(--text); color: var(--bg);
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .topbar-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -8px rgba(255,255,255,0.3); }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.6rem; }
+
+  /* ── HERO ── */
+  .hero { padding: 6rem 0 3.5rem; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--emerald); letter-spacing: 0.04em;
+    padding: 0.4rem 0.9rem; border-radius: 999px;
+    border: 1px solid rgba(52,211,153,0.25);
+    background: rgba(52,211,153,0.06);
+    margin-bottom: 1.8rem;
+  }
+  .hero-badge .ping {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--emerald);
+    box-shadow: 0 0 0 0 rgba(52,211,153,0.6);
+    animation: ping 2s cubic-bezier(0,0,0.2,1) infinite;
+  }
+  @keyframes ping {
+    0%   { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+    70%  { box-shadow: 0 0 0 7px rgba(52,211,153,0); }
+    100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+  }
+  .hero h1 {
+    font-weight: 600; letter-spacing: -0.035em;
+    font-size: clamp(2.6rem, 6.5vw, 4.7rem);
+    line-height: 1.02;
+    max-width: 16ch;
+    margin-bottom: 1.4rem;
+  }
+  .hero h1 .accent {
+    font-family: var(--serif); font-weight: 400; font-style: italic;
+    letter-spacing: -0.01em;
+    background: linear-gradient(110deg, var(--indigo), var(--emerald));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-lede {
+    font-size: 1.12rem; color: var(--text-2);
+    max-width: 54ch; line-height: 1.7; font-weight: 300;
+    margin-bottom: 2.4rem;
+  }
+  .hero-lede strong { color: var(--text); font-weight: 500; }
+
+  /* metric strip */
+  .metric-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: var(--r);
+    overflow: hidden; margin-top: 0.5rem;
+  }
+  .metric {
+    background: var(--bg-2); padding: 1.3rem 1.4rem;
+  }
+  .metric-val {
+    font-family: var(--mono); font-weight: 500;
+    font-size: 1.7rem; letter-spacing: -0.02em;
+    color: var(--text);
+    display: flex; align-items: baseline; gap: 0.1rem;
+  }
+  .metric-val .unit { font-size: 1rem; color: var(--indigo); }
+  .metric-label {
+    font-size: 0.74rem; color: var(--muted);
+    margin-top: 0.35rem; line-height: 1.4;
+  }
+
+  /* ── SECTION SCAFFOLD ── */
+  section.block { padding: 4.5rem 0; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--indigo); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 0.9rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .eyebrow::before {
+    content: ''; width: 18px; height: 1px; background: var(--indigo);
+  }
+  .block-title {
+    font-weight: 600; letter-spacing: -0.025em;
+    font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+    line-height: 1.1; margin-bottom: 0.7rem;
+  }
+  .block-title em {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    color: var(--indigo);
+  }
+  .block-sub {
+    color: var(--muted); font-size: 1rem; max-width: 60ch;
+    line-height: 1.7; margin-bottom: 2.4rem;
+  }
+
+  /* ── DECISION ENGINE (showpiece) ── */
+  .engine {
+    border: 1px solid var(--line-2);
+    border-radius: var(--r);
+    background:
+      linear-gradient(180deg, var(--surface), var(--bg-2));
+    overflow: hidden;
+    box-shadow: 0 40px 90px -40px rgba(0,0,0,0.7);
+  }
+  .engine-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.3rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  .engine-head-left { display: flex; align-items: center; gap: 0.7rem; }
+  .traffic { display: flex; gap: 0.4rem; }
+  .traffic span { width: 11px; height: 11px; border-radius: 50%; background: var(--line-2); }
+  .traffic span:nth-child(1) { background: #fb7185; }
+  .traffic span:nth-child(2) { background: #fbbf24; }
+  .traffic span:nth-child(3) { background: #34d399; }
+  .engine-title {
+    font-family: var(--mono); font-size: 0.78rem; color: var(--text-2);
+    letter-spacing: 0.02em;
+  }
+  .engine-live {
+    font-family: var(--mono); font-size: 0.68rem; color: var(--emerald);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .engine-live .ping { width: 6px; height: 6px; border-radius: 50%; background: var(--emerald); animation: ping 2s infinite; }
+
+  .engine-body {
+    display: grid; grid-template-columns: 0.85fr 1.15fr;
+  }
+  .engine-inputs {
+    padding: 1.5rem 1.5rem 1.7rem;
+    border-right: 1px solid var(--line);
+  }
+  .engine-output {
+    padding: 1.5rem 1.5rem 1.7rem;
+    background: rgba(0,0,0,0.15);
+  }
+
+  .input-group { margin-bottom: 1.5rem; }
+  .input-group:last-child { margin-bottom: 0; }
+  .input-label {
+    font-size: 0.72rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .input-label .hint { font-family: var(--mono); text-transform: none; letter-spacing: 0; color: var(--muted-2); }
+  .seg {
+    display: flex; gap: 4px; padding: 4px;
+    background: var(--bg); border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+  }
+  .seg button {
+    flex: 1; font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
+    color: var(--muted); background: transparent; border: none;
+    padding: 0.5rem 0.4rem; border-radius: 6px; cursor: pointer;
+    transition: all 0.18s; white-space: nowrap;
+  }
+  .seg button:hover { color: var(--text-2); }
+  .seg button.on {
+    color: var(--text);
+    background: var(--surface-2);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04), 0 2px 8px -2px rgba(0,0,0,0.5);
+  }
+  .seg button.on[data-tone="risk"]   { color: var(--rose); }
+  .seg button.on[data-tone="good"]   { color: var(--emerald); }
+
+  .output-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 1.1rem;
+  }
+  .output-head .lbl { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .recommend {
+    border: 1px solid rgba(129,140,248,0.4);
+    background: linear-gradient(180deg, rgba(129,140,248,0.12), rgba(129,140,248,0.03));
+    border-radius: var(--r-sm);
+    padding: 1rem 1.1rem; margin-bottom: 1.2rem;
+    position: relative; overflow: hidden;
+  }
+  .recommend::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--indigo), transparent);
+  }
+  .recommend .tag {
+    font-family: var(--mono); font-size: 0.64rem; color: var(--indigo);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .recommend .action {
+    font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em;
+    margin: 0.3rem 0 0.2rem;
+    transition: opacity 0.2s;
+  }
+  .recommend .conf {
+    font-size: 0.8rem; color: var(--text-2);
+  }
+  .recommend .conf b { color: var(--emerald); font-weight: 600; font-family: var(--mono); }
+
+  .ranklist { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.2rem; }
+  .rankrow { }
+  .rankrow-top {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.82rem; margin-bottom: 0.32rem;
+  }
+  .rankrow-name { color: var(--text-2); }
+  .rankrow.lead .rankrow-name { color: var(--text); font-weight: 600; }
+  .rankrow-score { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
+  .bar { height: 6px; background: var(--bg); border-radius: 999px; overflow: hidden; }
+  .bar-fill {
+    height: 100%; border-radius: 999px; width: 0%;
+    background: linear-gradient(90deg, var(--line-2), var(--muted));
+    transition: width 0.6s cubic-bezier(0.2,0.8,0.2,1);
+  }
+  .rankrow.lead .bar-fill {
+    background: linear-gradient(90deg, var(--indigo-d), var(--indigo));
+  }
+
+  .why {
+    border-top: 1px dashed var(--line-2); padding-top: 1rem;
+  }
+  .why-lbl {
+    font-size: 0.72rem; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 0.7rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .why-lbl::after {
+    content: 'explainable'; font-family: var(--mono); font-size: 0.6rem;
+    color: var(--emerald); text-transform: none; letter-spacing: 0;
+    border: 1px solid rgba(52,211,153,0.3); border-radius: 999px;
+    padding: 0.1rem 0.5rem;
+  }
+  .why-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .why-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.82rem; color: var(--text-2);
+  }
+  .why-item .chip {
+    font-family: var(--mono); font-size: 0.66rem;
+    padding: 0.15rem 0.5rem; border-radius: 5px;
+    background: var(--surface-2); color: var(--indigo);
+    min-width: 48px; text-align: center;
+  }
+  .why-item .chip.up   { color: var(--emerald); }
+  .why-item .chip.down { color: var(--rose); }
+
+  .engine-foot {
+    padding: 0.85rem 1.3rem;
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+    font-family: var(--mono); font-size: 0.7rem; color: var(--muted-2);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .engine-foot b { color: var(--muted); font-weight: 500; }
+
+  .engine-note {
+    margin-top: 1.1rem; font-size: 0.82rem; color: var(--muted);
+    display: flex; gap: 0.5rem; align-items: flex-start;
+  }
+  .engine-note .i {
+    color: var(--indigo); flex-shrink: 0;
+  }
+
+  /* ── PRINCIPLES ── */
+  .principles {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+    border-radius: var(--r); overflow: hidden;
+  }
+  .principle {
+    background: var(--bg-2); padding: 1.6rem 1.5rem;
+    transition: background 0.25s;
+  }
+  .principle:hover { background: var(--surface); }
+  .principle-num {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--muted-2);
+  }
+  .principle-title {
+    font-weight: 600; font-size: 1.1rem; letter-spacing: -0.01em;
+    margin: 0.8rem 0 0.5rem;
+  }
+  .principle-body { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+  .principle-body b { color: var(--text-2); font-weight: 500; }
+
+  /* ── EXPERIENCE / OUTCOMES ── */
+  .ledger { display: flex; flex-direction: column; gap: 1rem; }
+  .entry {
+    display: grid; grid-template-columns: 150px 1fr;
+    gap: 1.5rem;
+    border: 1px solid var(--line); border-radius: var(--r);
+    background: var(--bg-2); padding: 1.5rem 1.6rem;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .entry:hover { border-color: var(--line-2); transform: translateY(-2px); }
+  .entry-when {
+    font-family: var(--mono); font-size: 0.78rem; color: var(--muted);
+  }
+  .entry-when .now {
+    display: inline-block; margin-top: 0.4rem;
+    font-size: 0.64rem; color: var(--emerald);
+    border: 1px solid rgba(52,211,153,0.3); border-radius: 999px;
+    padding: 0.1rem 0.55rem; letter-spacing: 0.05em;
+  }
+  .entry-co { font-weight: 600; font-size: 1.15rem; letter-spacing: -0.01em; }
+  .entry-role { font-size: 0.9rem; color: var(--text-2); margin: 0.15rem 0 0.9rem; }
+  .entry-bullets { list-style: none; }
+  .entry-bullets li {
+    position: relative; padding-left: 1.3rem; margin-bottom: 0.5rem;
+    font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+  }
+  .entry-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 0.55em;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--indigo);
+  }
+  .entry-bullets li b { color: var(--text); font-weight: 500; }
+  .entry-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+  .etag {
+    font-family: var(--mono); font-size: 0.64rem; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.2rem 0.55rem;
+  }
+
+  /* ── CONTACT ── */
+  .contact-card {
+    border: 1px solid var(--line-2); border-radius: var(--r);
+    background:
+      radial-gradient(600px 250px at 50% -20%, rgba(129,140,248,0.14), transparent 70%),
+      var(--surface);
+    padding: 3rem 2.4rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .contact-card h2 {
+    font-weight: 600; letter-spacing: -0.03em;
+    font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem;
+  }
+  .contact-card h2 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--indigo); }
+  .contact-card p {
+    color: var(--text-2); max-width: 56ch; margin: 0 auto 2rem;
+    line-height: 1.7; font-weight: 300;
+  }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.5rem; border-radius: 10px;
+    font-size: 0.9rem; font-weight: 500; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .btn-primary { background: var(--text); color: var(--bg); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(255,255,255,0.35); }
+  .btn-ghost { border: 1px solid var(--line-2); color: var(--text-2); }
+  .btn-ghost:hover { border-color: var(--indigo); color: var(--text); transform: translateY(-2px); }
+
+  footer {
+    text-align: center; padding: 2.5rem 1rem 3rem;
+    font-family: var(--mono); font-size: 0.72rem; color: var(--muted-2);
+    border-top: 1px solid var(--line); margin-top: 3rem;
+  }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ── PREVIEW SWITCHER ── */
+  .preview-switch {
+    position: fixed; bottom: 18px; right: 18px; z-index: 50;
+    display: flex; gap: 0.3rem; padding: 0.4rem;
+    background: rgba(20,23,31,0.85);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--line-2); border-radius: 999px;
+    font-size: 0.7rem; letter-spacing: 0.04em;
+  }
+  .preview-switch a {
+    padding: 0.45rem 0.85rem; color: var(--muted);
+    text-decoration: none; border-radius: 999px; transition: all 0.2s;
+  }
+  .preview-switch a:hover { color: var(--text); }
+  .preview-switch a.active { background: var(--indigo); color: #0a0b10; font-weight: 600; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 820px) {
+    .topnav { display: none; }
+    .metric-strip { grid-template-columns: repeat(2, 1fr); }
+    .engine-body { grid-template-columns: 1fr; }
+    .engine-inputs { border-right: none; border-bottom: 1px solid var(--line); }
+    .principles { grid-template-columns: 1fr; }
+    .entry { grid-template-columns: 1fr; gap: 0.8rem; }
+    .preview-switch { font-size: 0.62rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ── -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">P</span>
+    <span>Priyanka Das<br><span class="brand-sub">PRODUCT · AI · DECISIONING</span></span>
+  </div>
+  <nav class="topnav">
+    <a href="#engine" class="active">Decision Engine</a>
+    <a href="#principles">Principles</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="#contact" class="topbar-cta">Available now →</a>
+</header>
+
+<main class="wrap">
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-badge"><span class="ping"></span>Open to Product Manager / PO / AI Builder roles — Stockholm &amp; remote</div>
+    <h1>I turn ambiguity into <span class="accent">shipped outcomes.</span></h1>
+    <p class="hero-lede">
+      Senior PM &amp; Business Architect with <strong>9 years</strong> across banking, public sector and insurance. I own discovery → roadmap → delivery → adoption, and I build <strong>AI-driven decisioning</strong> that's transparent enough to trust. Scroll down — instead of telling you I understand next-best-action systems, I'll let you operate one.
+    </p>
+
+    <div class="metric-strip">
+      <div class="metric">
+        <div class="metric-val" data-count="80" data-suffix="%"><span>0</span></div>
+        <div class="metric-label">claim processing time reduced, insurance client</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val" data-count="1.2" data-suffix="M" data-decimals="1"><span>0</span></div>
+        <div class="metric-label">users served across shipped platforms</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val" data-count="26" data-suffix=""><span>0</span></div>
+        <div class="metric-label">stakeholder funds aligned on one roadmap</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val" data-count="9" data-suffix="yrs"><span>0</span></div>
+        <div class="metric-label">in regulated, complex domains</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DECISION ENGINE ── -->
+  <section class="block" id="engine">
+    <div class="eyebrow">Interactive · Live</div>
+    <h2 class="block-title">My thinking, <em>made operable.</em></h2>
+    <p class="block-sub">
+      A core part of my work is <b style="color:var(--text-2)">next-best-action decisioning</b> — choosing the single right intervention for a customer, and being able to explain why. This is a working model of how I approach it. Change the customer context; watch the engine re-rank actions and show its reasoning. No black boxes — that's the whole point.
+    </p>
+
+    <div class="engine reveal">
+      <div class="engine-head">
+        <div class="engine-head-left">
+          <div class="traffic"><span></span><span></span><span></span></div>
+          <span class="engine-title">next-best-action.engine</span>
+        </div>
+        <span class="engine-live"><span class="ping"></span>RECOMPUTING IN REAL TIME</span>
+      </div>
+
+      <div class="engine-body">
+        <!-- INPUTS -->
+        <div class="engine-inputs">
+          <div class="input-group">
+            <div class="input-label">Churn risk <span class="hint">signal weight ↑</span></div>
+            <div class="seg" data-input="churn">
+              <button data-val="low" data-tone="good">Low</button>
+              <button data-val="med" class="on">Medium</button>
+              <button data-val="high" data-tone="risk">High</button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-label">Primary product</div>
+            <div class="seg" data-input="product">
+              <button data-val="savings" class="on">Savings</button>
+              <button data-val="mortgage">Mortgage</button>
+              <button data-val="card">Card</button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-label">Most recent signal</div>
+            <div class="seg" data-input="signal">
+              <button data-val="complaint" data-tone="risk" class="on">Complaint</button>
+              <button data-val="browsing">Browsed offers</button>
+              <button data-val="inactive">Gone quiet</button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-label">Recent contact load <span class="hint">fatigue guardrail</span></div>
+            <div class="seg" data-input="fatigue">
+              <button data-val="none" class="on">None</button>
+              <button data-val="some">Some</button>
+              <button data-val="high" data-tone="risk">Heavy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- OUTPUT -->
+        <div class="engine-output">
+          <div class="output-head">
+            <span class="lbl">Recommended action</span>
+            <span class="lbl" id="scenarioId" style="font-family:var(--mono);color:var(--muted-2)">#000</span>
+          </div>
+
+          <div class="recommend">
+            <div class="tag">▴ Top decision</div>
+            <div class="action" id="topAction">—</div>
+            <div class="conf">Confidence <b id="topConf">—</b> · margin over next best <span id="topMargin" style="font-family:var(--mono);color:var(--text-2)">—</span></div>
+          </div>
+
+          <div class="ranklist" id="ranklist"></div>
+
+          <div class="why">
+            <div class="why-lbl">Why this action</div>
+            <div class="why-list" id="whyList"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="engine-foot">
+        <span>model: <b>transparent weighted scoring</b> · 5 candidate actions</span>
+        <span id="evalCount">0 evaluations</span>
+      </div>
+    </div>
+
+    <p class="engine-note">
+      <span class="i">◇</span>
+      <span>This is the product instinct I bring: surface the <b style="color:var(--text-2)">one</b> action that matters, keep humans in the loop with a fatigue guardrail, and never ship a recommendation you can't explain to a regulator, an agent, or the customer themselves.</span>
+    </p>
+  </section>
+
+  <!-- ── PRINCIPLES ── -->
+  <section class="block" id="principles">
+    <div class="eyebrow">Operating Model</div>
+    <h2 class="block-title">How I think about <em>product.</em></h2>
+    <p class="block-sub">The mindset behind the engine above — and behind everything I ship.</p>
+
+    <div class="principles">
+      <div class="principle reveal">
+        <div class="principle-num">01</div>
+        <div class="principle-title">Outcomes over outputs</div>
+        <p class="principle-body">I measure success by <b>behaviour change</b>, not tickets closed. Before any PRD: what shifts if we build this, and how will we know?</p>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-num">02</div>
+        <div class="principle-title">Data-informed, not data-driven</div>
+        <p class="principle-body">Numbers tell me <b>what</b>; discovery interviews tell me <b>why</b>. I pair both and validate with A/B rigour before scaling.</p>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-num">03</div>
+        <div class="principle-title">Structured under ambiguity</div>
+        <p class="principle-body">In regulated environments I lean on <b>RICE prioritisation</b> and documented trade-offs — so decisions stay auditable and reversible.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WORK / OUTCOMES ── -->
+  <section class="block" id="work">
+    <div class="eyebrow">Track Record</div>
+    <h2 class="block-title">Shipped, <em>end to end.</em></h2>
+    <p class="block-sub">Nine years of owning the full arc — discovery to adoption — across some of the most regulated domains there are.</p>
+
+    <div class="ledger">
+      <div class="entry reveal">
+        <div class="entry-when">
+          2021.11 — present<br><span class="now">CURRENT</span>
+        </div>
+        <div>
+          <div class="entry-co">Capgemini Sverige AB <span style="color:var(--muted);font-weight:400;font-size:0.85rem">· Stockholm</span></div>
+          <div class="entry-role">Senior Consultant — Business Architect · embedded PM / PO</div>
+          <ul class="entry-bullets">
+            <li>Owned <b>discovery, roadmap, backlog and delivery end-to-end</b> as an embedded PM/PO across client engagements.</li>
+            <li>Delivered platform enhancements contributing to a <b>~80% reduction in claim processing time</b> for an insurance client.</li>
+            <li>Led AI initiatives in retention &amp; public-sector transformation — <b>Pega GenAI, AI Agent design, agentic AI</b> and next-best-action decisioning.</li>
+          </ul>
+          <div class="entry-tags">
+            <span class="etag">NORDIC BANKING</span>
+            <span class="etag">PUBLIC SECTOR</span>
+            <span class="etag">EU INSURANCE</span>
+            <span class="etag">SAFe AGILE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry reveal">
+        <div class="entry-when">2019.08 — 2021.10</div>
+        <div>
+          <div class="entry-co">Instasmart (Truviq) <span style="color:var(--muted);font-weight:400;font-size:0.85rem">· India</span></div>
+          <div class="entry-role">Workflow Automation Developer</div>
+          <ul class="entry-bullets">
+            <li>Built workflow-driven platforms supporting <b>large-scale vendor management including Amazon</b>.</li>
+            <li>Translated requirements into case types, SLAs and decision logic for scalable <b>vendor onboarding automation</b>.</li>
+          </ul>
+          <div class="entry-tags">
+            <span class="etag">VENDOR MGMT</span>
+            <span class="etag">E-COMMERCE</span>
+            <span class="etag">WORKFLOW</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry reveal">
+        <div class="entry-when">2016.02 — 2019.07</div>
+        <div>
+          <div class="entry-co">HDFC Bank Ltd <span style="color:var(--muted);font-weight:400;font-size:0.85rem">· India</span></div>
+          <div class="entry-role">QA Tester — Corporate Banking &amp; Finance</div>
+          <ul class="entry-bullets">
+            <li>Designed test scenarios across enterprise banking platforms in a <b>highly regulated environment</b>.</li>
+            <li>Drove automation with <b>UiPath RPA</b>, catching defects early and reducing production issues.</li>
+          </ul>
+          <div class="entry-tags">
+            <span class="etag">ENTERPRISE BANKING</span>
+            <span class="etag">RPA</span>
+            <span class="etag">REGULATED</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="block" id="contact">
+    <div class="contact-card reveal">
+      <h2>Let's build something <em>worth shipping.</em></h2>
+      <p>
+        Looking for Product Manager, Product Owner or AI Builder PM roles in Stockholm and worldwide remotely — available immediately. I own end-to-end delivery, unblock teams through intelligent automation, and ship AI-driven solutions at scale.
+      </p>
+      <div class="contact-actions">
+        <a href="mailto:hello.priyankapm@gmail.com" class="btn btn-primary">✉ hello.priyankapm@gmail.com</a>
+        <a href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" rel="noopener" class="btn btn-ghost">↗ LinkedIn</a>
+        <a href="https://wa.me/46737810307" target="_blank" rel="noopener" class="btn btn-ghost">💬 WhatsApp</a>
+        <a href="#" class="btn btn-ghost">↓ Download CV</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 PRIYANKA DAS · STOCKHOLM · DECISION STUDIO PREVIEW v0.3
+</footer>
+
+<div class="preview-switch">
+  <a href="index.html">Live</a>
+  <a href="preview.html">P1</a>
+  <a href="preview2.html">P2</a>
+  <a href="preview3.html" class="active">P3</a>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+//  NEXT-BEST-ACTION DECISION ENGINE
+//  Transparent weighted scoring across 5 actions.
+// ════════════════════════════════════════════════
+(function() {
+  const state = { churn: 'med', product: 'savings', signal: 'complaint', fatigue: 'none' };
+  let evals = 0;
+
+  // Candidate actions with a base appeal + factor-driven contributions.
+  const ACTIONS = [
+    { id: 'retain',  name: 'Targeted retention offer' },
+    { id: 'human',   name: 'Proactive human outreach' },
+    { id: 'upsell',  name: 'Personalised upsell' },
+    { id: 'educate', name: 'Educational nudge' },
+    { id: 'hold',    name: 'Hold — no action yet' },
+  ];
+
+  // Each scorer returns { score, reasons: [{label, delta}] }
+  function scoreAction(id, s) {
+    let base = 12, reasons = [];
+    const add = (label, delta) => { base += delta; reasons.push({ label, delta }); };
+
+    if (id === 'retain') {
+      if (s.churn === 'high') add('High churn risk', 34);
+      else if (s.churn === 'med') add('Medium churn risk', 16);
+      else add('Low churn risk', -10);
+      if (s.signal === 'complaint') add('Active complaint', 18);
+      if (s.signal === 'browsing') add('Browsing offers', 8);
+      if (s.product === 'mortgage') add('High-value product', 10);
+      if (s.fatigue === 'high') add('Contact fatigue', -16);
+    }
+
+    if (id === 'human') {
+      if (s.signal === 'complaint') add('Active complaint', 30);
+      if (s.churn === 'high') add('High churn risk', 20);
+      else if (s.churn === 'med') add('Medium churn risk', 8);
+      if (s.product === 'mortgage') add('High-value relationship', 14);
+      if (s.fatigue === 'high') add('Already over-contacted', -22);
+      if (s.fatigue === 'some') add('Some recent contact', -8);
+    }
+
+    if (id === 'upsell') {
+      if (s.churn === 'low') add('Low churn — safe to grow', 26);
+      else if (s.churn === 'high') add('Too risky to upsell now', -28);
+      if (s.signal === 'browsing') add('Browsing offers', 24);
+      if (s.signal === 'complaint') add('Unresolved complaint', -24);
+      if (s.product === 'card') add('Card cross-sell fit', 12);
+      if (s.fatigue === 'high') add('Contact fatigue', -12);
+    }
+
+    if (id === 'educate') {
+      if (s.signal === 'inactive') add('Gone quiet — re-engage', 30);
+      if (s.churn === 'med') add('Medium risk — low-cost touch', 12);
+      if (s.churn === 'low') add('Low risk — nurture', 10);
+      if (s.signal === 'complaint') add('Complaint needs more than info', -16);
+      if (s.fatigue === 'none') add('Channel headroom', 8);
+    }
+
+    if (id === 'hold') {
+      if (s.fatigue === 'high') add('Respect contact fatigue', 30);
+      if (s.fatigue === 'some') add('Some recent contact', 12);
+      if (s.churn === 'low' && s.signal === 'inactive') add('Low risk, no trigger', 14);
+      if (s.signal === 'complaint') add('Complaint demands action', -26);
+      if (s.churn === 'high') add('High risk demands action', -20);
+    }
+
+    return { score: Math.max(base, 2), reasons };
+  }
+
+  function recompute() {
+    evals++;
+    const scored = ACTIONS.map(a => {
+      const r = scoreAction(a.id, state);
+      return { ...a, ...r };
+    }).sort((x, y) => y.score - x.score);
+
+    const max = Math.max(...scored.map(a => a.score));
+    const total = scored.reduce((sum, a) => sum + a.score, 0);
+    const top = scored[0];
+    const second = scored[1];
+    const conf = Math.round((top.score / total) * 100);
+    const margin = top.score - second.score;
+
+    // Top recommend card
+    const topActionEl = document.getElementById('topAction');
+    topActionEl.style.opacity = 0;
+    setTimeout(() => { topActionEl.textContent = top.name; topActionEl.style.opacity = 1; }, 120);
+    document.getElementById('topConf').textContent = conf + '%';
+    document.getElementById('topMargin').textContent = '+' + margin + ' pts';
+
+    // Ranked list
+    const list = document.getElementById('ranklist');
+    list.innerHTML = '';
+    scored.forEach((a, i) => {
+      const row = document.createElement('div');
+      row.className = 'rankrow' + (i === 0 ? ' lead' : '');
+      row.innerHTML = `
+        <div class="rankrow-top">
+          <span class="rankrow-name">${a.name}</span>
+          <span class="rankrow-score">${a.score}</span>
+        </div>
+        <div class="bar"><div class="bar-fill"></div></div>`;
+      list.appendChild(row);
+      requestAnimationFrame(() => {
+        row.querySelector('.bar-fill').style.width = Math.round((a.score / max) * 100) + '%';
+      });
+    });
+
+    // Why panel — dominant reasons for the winner
+    const why = document.getElementById('whyList');
+    why.innerHTML = '';
+    const reasons = top.reasons.slice().sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta)).slice(0, 4);
+    if (reasons.length === 0) reasons.push({ label: 'Baseline appeal — no strong signals', delta: 0 });
+    reasons.forEach(r => {
+      const item = document.createElement('div');
+      item.className = 'why-item';
+      const cls = r.delta > 0 ? 'up' : r.delta < 0 ? 'down' : '';
+      const sign = r.delta > 0 ? '+' : '';
+      item.innerHTML = `<span class="chip ${cls}">${sign}${r.delta}</span><span>${r.label}</span>`;
+      why.appendChild(item);
+    });
+
+    document.getElementById('scenarioId').textContent =
+      '#' + [state.churn, state.product, state.signal, state.fatigue]
+        .map(v => v[0].toUpperCase()).join('');
+    document.getElementById('evalCount').textContent =
+      evals.toLocaleString() + (evals === 1 ? ' evaluation' : ' evaluations');
+  }
+
+  // Wire up segmented controls
+  document.querySelectorAll('.seg').forEach(seg => {
+    const key = seg.dataset.input;
+    seg.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        seg.querySelectorAll('button').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        state[key] = btn.dataset.val;
+        recompute();
+      });
+    });
+  });
+
+  recompute();
+})();
+
+// ── METRIC COUNTERS ──
+(function() {
+  function animate(el) {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const decimals = parseInt(el.dataset.decimals || '0');
+    const span = el.querySelector('span');
+    const dur = 1400, start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      const val = target * e;
+      span.textContent = decimals > 0 ? val.toFixed(decimals) : Math.round(val);
+      if (p < 1) requestAnimationFrame(step);
+      else el.innerHTML = (decimals > 0 ? target.toFixed(decimals) : target) + (suffix ? `<span class="unit">${suffix}</span>` : '');
+    }
+    requestAnimationFrame(step);
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.metric-val').forEach(el => obs.observe(el));
+})();
+
+// ── REVEAL ──
+(function() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
+
+// ── ACTIVE NAV ──
+(function() {
+  const ids = ['engine', 'principles', 'work', 'contact'];
+  const links = document.querySelectorAll('.topnav a');
+  function onScroll() {
+    let active = ids[0];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < window.innerHeight * 0.4) active = id;
+    });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
