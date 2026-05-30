@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Priyanka Das — Atelier (Preview 2)</title>
+<meta name="robots" content="noindex,nofollow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@200;300;400;500&family=Italiana&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --void:     #0a0612;
+    --void-2:   #14091e;
+    --void-3:   #1d0e2c;
+    --magenta:  #ff5d9e;
+    --amber:    #ffb454;
+    --ice:      #b8e0ff;
+    --pearl:    #f5ecde;
+    --pearl-2:  #c9bdaa;
+    --shadow:   #5a4068;
+    --muted:    #8d7a98;
+    --muted-2:  #5d4d68;
+    --gold:     #d4a554;
+
+    --serif:    'Playfair Display', Georgia, serif;
+    --display:  'Italiana', 'Playfair Display', serif;
+    --sans:     'Inter', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    background: var(--void);
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--void);
+    color: var(--pearl);
+    font-family: var(--sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── AURORA BACKGROUND BLOBS ── */
+  .aurora {
+    position: fixed; inset: -20%;
+    z-index: 0; pointer-events: none;
+    overflow: hidden;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    mix-blend-mode: screen;
+    will-change: transform;
+  }
+  .blob-1 {
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, var(--magenta), transparent 60%);
+    top: -10%; left: -15%;
+    animation: drift-1 28s ease-in-out infinite;
+  }
+  .blob-2 {
+    width: 55vw; height: 55vw;
+    background: radial-gradient(circle, var(--amber), transparent 60%);
+    top: 35%; right: -15%;
+    animation: drift-2 36s ease-in-out infinite;
+    opacity: 0.35;
+  }
+  .blob-3 {
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, var(--ice), transparent 60%);
+    bottom: -15%; left: 25%;
+    animation: drift-3 42s ease-in-out infinite;
+    opacity: 0.3;
+  }
+  .blob-4 {
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, var(--shadow), transparent 65%);
+    top: 60%; left: -5%;
+    animation: drift-4 32s ease-in-out infinite;
+    opacity: 0.5;
+  }
+  @keyframes drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(20vw, 30vh) scale(1.1); }
+  }
+  @keyframes drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-15vw, 20vh) scale(1.15); }
+  }
+  @keyframes drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(10vw, -25vh) scale(0.9); }
+  }
+  @keyframes drift-4 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(25vw, -15vh) scale(1.2); }
+  }
+
+  /* ── DUST MOTES CANVAS ── */
+  #dust {
+    position: fixed; inset: 0;
+    z-index: 1; pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  /* ── GRAIN / VIGNETTE ── */
+  .grain {
+    position: fixed; inset: 0; z-index: 2;
+    pointer-events: none; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+  .vignette {
+    position: fixed; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(10,6,18,0.8) 100%);
+  }
+
+  /* ── SIDE INDEX (minimalist) ── */
+  .index-side {
+    position: fixed; top: 50%; left: 28px;
+    transform: translateY(-50%);
+    z-index: 30;
+    display: flex; flex-direction: column; gap: 1.4rem;
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.85rem; color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .index-side a {
+    color: var(--muted); text-decoration: none;
+    transition: color 0.3s, transform 0.3s;
+    position: relative;
+    padding-left: 0;
+    display: inline-block;
+  }
+  .index-side a::before {
+    content: '';
+    display: inline-block;
+    width: 0; height: 1px;
+    background: var(--magenta);
+    vertical-align: middle;
+    margin-right: 0;
+    transition: width 0.3s, margin 0.3s;
+  }
+  .index-side a.active, .index-side a:hover {
+    color: var(--pearl);
+  }
+  .index-side a.active::before {
+    width: 30px; margin-right: 12px;
+  }
+
+  /* ── PAGE FRAME ── */
+  main {
+    position: relative; z-index: 10;
+  }
+  section {
+    position: relative;
+    padding: 8rem 2rem;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding-top: 4rem;
+    perspective: 1200px;
+  }
+  .credit-line {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    color: var(--pearl-2);
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeIn 1.4s 0.2s forwards;
+  }
+  .credit-line .divider {
+    color: var(--magenta);
+    margin: 0 0.8rem;
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .hero-title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(4rem, 14vw, 11rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--pearl);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .hero-title .line-2 {
+    display: block;
+    font-style: italic;
+    color: transparent;
+    background: linear-gradient(120deg, var(--magenta) 10%, var(--amber) 50%, var(--ice) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transform: translateX(8vw);
+  }
+  .hero-title .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  .hero-title .word:nth-child(2) { animation-delay: 0.15s; }
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-sub {
+    margin-top: 3rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 4rem;
+    flex-wrap: wrap;
+    max-width: 1100px;
+  }
+  .hero-meta-block {
+    flex: 0 0 240px;
+    border-left: 1px solid var(--shadow);
+    padding-left: 1.4rem;
+    opacity: 0;
+    animation: fadeIn 1.6s 0.8s forwards;
+  }
+  .meta-label {
+    font-size: 0.62rem; color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .meta-value {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--pearl);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .meta-divider { height: 1.2rem; }
+
+  .hero-statement {
+    flex: 1; min-width: 280px; max-width: 560px;
+    font-size: 1.05rem;
+    color: var(--pearl-2);
+    line-height: 1.75;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeIn 1.6s 1.1s forwards;
+  }
+  .hero-statement strong {
+    color: var(--pearl); font-weight: 400;
+    font-style: italic; font-family: var(--serif);
+  }
+
+  .scroll-cue {
+    position: absolute; bottom: 3rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.8rem; color: var(--muted);
+    letter-spacing: 0.2em;
+    opacity: 0;
+    animation: fadeIn 2s 1.8s forwards, bob 2.5s 2s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── ACT TITLE CARD (cinematic interstitial) ── */
+  .act-card {
+    min-height: 60vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 6rem 2rem;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .act-num {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1rem; color: var(--magenta);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 1s, transform 1s;
+  }
+  .act-title {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 8vw, 6rem);
+    line-height: 1; color: var(--pearl);
+    font-weight: 400;
+    max-width: 18ch;
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 1.4s 0.2s, transform 1.4s 0.2s;
+  }
+  .act-title em {
+    color: transparent;
+    background: linear-gradient(120deg, var(--amber), var(--magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-style: italic;
+  }
+  .act-blurb {
+    margin-top: 2rem; max-width: 56ch;
+    font-size: 1rem; color: var(--pearl-2);
+    line-height: 1.8;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 1.4s 0.5s, transform 1.4s 0.5s;
+  }
+  .act-card.visible .act-num,
+  .act-card.visible .act-title,
+  .act-card.visible .act-blurb {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ── FLOATING CARDS / GALLERY ── */
+  .gallery {
+    position: relative;
+    padding: 4rem 0;
+    perspective: 1800px;
+  }
+  .gallery-track {
+    display: flex; flex-direction: column;
+    gap: 8rem;
+    transform-style: preserve-3d;
+  }
+
+  .float-card {
+    position: relative;
+    background:
+      linear-gradient(135deg, rgba(255, 93, 158, 0.06) 0%, rgba(255, 180, 84, 0.04) 100%),
+      rgba(20, 9, 30, 0.55);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgba(245, 236, 222, 0.08);
+    border-radius: 2px;
+    padding: 3rem 3rem 2.5rem;
+    max-width: 720px;
+    transform-style: preserve-3d;
+    will-change: transform;
+    opacity: 0;
+    transform: translateY(60px) rotateX(8deg) translateZ(-80px);
+    transition: opacity 1.2s ease, transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow:
+      0 30px 80px -20px rgba(0, 0, 0, 0.6),
+      0 0 60px -10px rgba(255, 93, 158, 0.12),
+      inset 0 1px 0 rgba(245, 236, 222, 0.08);
+  }
+  .float-card.visible {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) translateZ(0);
+  }
+  .float-card.tilt-left  { transform-origin: left center; }
+  .float-card.tilt-right {
+    margin-left: auto;
+    transform-origin: right center;
+  }
+  .float-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--magenta), var(--amber), transparent);
+    opacity: 0.7;
+  }
+
+  .card-eyebrow {
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.78rem; color: var(--magenta);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .card-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--magenta);
+  }
+  .card-period {
+    font-family: var(--sans); font-size: 0.7rem;
+    color: var(--muted); letter-spacing: 0.18em;
+    margin-bottom: 1.4rem;
+  }
+  .card-company {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+    color: var(--pearl); font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 0.4rem;
+  }
+  .card-role {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.1rem; color: var(--pearl-2);
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+  }
+  .card-domain {
+    font-size: 0.72rem; color: var(--muted);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 1.8rem;
+  }
+  .card-divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, var(--amber), transparent);
+    margin-bottom: 1.6rem;
+  }
+  .card-bullets {
+    list-style: none;
+  }
+  .card-bullets li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.92rem; color: var(--pearl-2);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .card-bullets li::before {
+    content: '◇';
+    position: absolute; left: 0; top: 0.1rem;
+    color: var(--amber); font-size: 0.8rem;
+  }
+  .card-bullets li strong {
+    color: var(--pearl); font-weight: 400;
+    font-family: var(--serif); font-style: italic;
+  }
+  .card-footer-tags {
+    margin-top: 1.8rem;
+    padding-top: 1.4rem;
+    border-top: 1px dashed rgba(245,236,222,0.1);
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .footer-tag {
+    font-size: 0.68rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(245, 236, 222, 0.15);
+    color: var(--pearl-2);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    background: rgba(255, 93, 158, 0.05);
+  }
+  .footer-tag.amber {
+    color: var(--amber);
+    border-color: rgba(255, 180, 84, 0.3);
+    background: rgba(255, 180, 84, 0.06);
+  }
+
+  /* ── PORTAL / CONTACT ── */
+  #contact {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding-bottom: 8rem;
+    position: relative;
+  }
+  .portal {
+    position: relative;
+    width: clamp(280px, 60vw, 520px);
+    aspect-ratio: 1;
+    margin: 1rem auto 2rem;
+  }
+  .portal-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 93, 158, 0.3);
+    animation: pulse-out 4s ease-out infinite;
+  }
+  .portal-ring:nth-child(2) { animation-delay: 1s; border-color: rgba(255, 180, 84, 0.3); }
+  .portal-ring:nth-child(3) { animation-delay: 2s; border-color: rgba(184, 224, 255, 0.3); }
+  .portal-ring:nth-child(4) { animation-delay: 3s; border-color: rgba(255, 93, 158, 0.3); }
+  @keyframes pulse-out {
+    0%   { transform: scale(0.4); opacity: 0; }
+    25%  { opacity: 1; }
+    100% { transform: scale(1.4); opacity: 0; }
+  }
+  .portal-core {
+    position: absolute; inset: 20%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, rgba(255, 93, 158, 0.4) 0%, rgba(255, 180, 84, 0.2) 50%, transparent 70%);
+    filter: blur(20px);
+    animation: pulse-core 5s ease-in-out infinite;
+  }
+  @keyframes pulse-core {
+    0%, 100% { transform: scale(1);   opacity: 0.7; }
+    50%      { transform: scale(1.15); opacity: 1; }
+  }
+  .portal-content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    gap: 0.4rem;
+  }
+  .portal-eyebrow {
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.8rem; color: var(--magenta);
+    letter-spacing: 0.3em; text-transform: uppercase;
+  }
+  .portal-title {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    line-height: 1; color: var(--pearl);
+  }
+  .portal-title em {
+    font-style: italic;
+    color: transparent;
+    background: linear-gradient(120deg, var(--magenta), var(--amber));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .portal-body {
+    max-width: 56ch;
+    margin: 1.4rem auto 2.4rem;
+    font-size: 1rem;
+    color: var(--pearl-2);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .portal-channels {
+    display: flex; flex-wrap: wrap; gap: 1.2rem;
+    justify-content: center;
+  }
+  .channel {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(245, 236, 222, 0.2);
+    color: var(--pearl);
+    text-decoration: none;
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.95rem; letter-spacing: 0.05em;
+    background: rgba(20, 9, 30, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 999px;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative; overflow: hidden;
+  }
+  .channel:hover {
+    border-color: var(--magenta);
+    color: var(--pearl);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px -8px rgba(255, 93, 158, 0.4);
+  }
+  .channel.primary {
+    background: linear-gradient(135deg, var(--magenta), var(--amber));
+    color: var(--void);
+    border-color: transparent;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .channel.primary:hover {
+    box-shadow: 0 12px 50px -8px rgba(255, 93, 158, 0.6);
+  }
+
+  .portal-coord {
+    margin-top: 4rem;
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+  }
+  .portal-coord .dot {
+    color: var(--magenta);
+    margin: 0 0.8rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 2rem 1rem 4rem;
+    font-family: var(--serif); font-style: italic;
+    font-size: 0.78rem;
+    color: var(--muted-2);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── PREVIEW SWITCHER ── */
+  .preview-switch {
+    position: fixed; bottom: 20px; right: 20px;
+    z-index: 50;
+    display: flex; gap: 0.4rem;
+    padding: 0.5rem;
+    background: rgba(20, 9, 30, 0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 93, 158, 0.25);
+    border-radius: 999px;
+    font-family: var(--sans); font-size: 0.7rem;
+    letter-spacing: 0.15em;
+  }
+  .preview-switch a {
+    padding: 0.5rem 1rem;
+    color: var(--muted);
+    text-decoration: none;
+    border-radius: 999px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+  .preview-switch a:hover { color: var(--pearl); }
+  .preview-switch a.active {
+    background: var(--magenta);
+    color: var(--void);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .index-side { display: none; }
+    section { padding: 5rem 1.4rem; }
+    .float-card {
+      padding: 2rem 1.6rem 1.8rem;
+      transform: translateY(60px);
+    }
+    .float-card.tilt-right { margin-left: 0; }
+    .hero-sub { gap: 2.4rem; }
+    .hero-meta-block { flex-basis: 100%; }
+    .preview-switch { font-size: 0.62rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+    .float-card { opacity: 1; transform: none; }
+    .act-card .act-num,
+    .act-card .act-title,
+    .act-card .act-blurb { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── BG LAYERS ── -->
+<div class="aurora" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+<canvas id="dust"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ── SIDE INDEX ── -->
+<nav class="index-side" aria-label="Section navigation">
+  <a href="#hero" data-target="hero" class="active">I &nbsp;Opening</a>
+  <a href="#act-1" data-target="act-1">II &nbsp;Method</a>
+  <a href="#experience" data-target="experience">III &nbsp;Trajectory</a>
+  <a href="#contact" data-target="contact">IV &nbsp;Transmission</a>
+</nav>
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="credit-line">
+      A <span class="divider">·</span> Product <span class="divider">·</span> Manager <span class="divider">·</span> Built <span class="divider">·</span> For <span class="divider">·</span> The <span class="divider">·</span> AI <span class="divider">·</span> Era
+    </div>
+
+    <h1 class="hero-title" id="heroTitle">
+      <span class="word">Priyanka</span>
+      <span class="line-2"><span class="word">Das.</span></span>
+    </h1>
+
+    <div class="hero-sub">
+      <div class="hero-meta-block">
+        <div class="meta-label">Based In</div>
+        <div class="meta-value">Stockholm, Sweden</div>
+        <div class="meta-divider"></div>
+        <div class="meta-label">Practice</div>
+        <div class="meta-value">AI Product · End-to-End</div>
+        <div class="meta-divider"></div>
+        <div class="meta-label">Status</div>
+        <div class="meta-value" style="color: var(--magenta);">Available — now</div>
+      </div>
+
+      <p class="hero-statement">
+        I build product the way a <strong>composer</strong> builds music — discovery, structure, motion, release. From the messy first interview to the moment something ships and adoption begins to bend the curve, I own the whole arc. Nine years across <strong>banking, public sector, insurance</strong> and AI-driven decisioning have taught me one thing: the work is never just about features. It's about removing friction so teams can build, and shipping intelligence where it changes someone's day.
+      </p>
+    </div>
+
+    <div class="scroll-cue">scroll &nbsp;&nbsp;↓&nbsp;&nbsp; continue</div>
+  </section>
+
+  <!-- ── ACT I: METHOD ── -->
+  <section id="act-1" class="act-card reveal-act">
+    <div class="act-num">— Act I</div>
+    <h2 class="act-title">How I think about <em>product.</em></h2>
+    <p class="act-blurb">
+      Product management is a series of small bets made under uncertainty. The discipline is not in choosing fast — it's in noticing earlier which bets are wrong. I keep teams close to users, evidence honest, and decisions reversible until they have to land. When the work is right, it looks quiet from the outside and inevitable in retrospect.
+    </p>
+  </section>
+
+  <!-- ── ACT II: TRAJECTORY ── -->
+  <section id="experience">
+    <div class="act-card reveal-act" style="min-height: auto; padding: 0 0 4rem 0;">
+      <div class="act-num">— Act II</div>
+      <h2 class="act-title">A <em>nine-year</em> trajectory.</h2>
+    </div>
+
+    <div class="gallery">
+      <div class="gallery-track">
+
+        <article class="float-card tilt-left reveal-card">
+          <div class="card-eyebrow">Current Engagement</div>
+          <div class="card-period">2021.11 — Present &nbsp;·&nbsp; Stockholm</div>
+          <h3 class="card-company">Capgemini <em style="font-style:italic;">Sverige AB</em></h3>
+          <div class="card-role">Senior Consultant — Business Architect · PM / PO</div>
+          <div class="card-domain">Public Sector · Banking · Insurance · Transport</div>
+          <div class="card-divider"></div>
+          <ul class="card-bullets">
+            <li>Functioned as an <strong>embedded Product Manager and Product Owner</strong> across client engagements — owning discovery, roadmap, backlog and delivery end-to-end within a consulting structure.</li>
+            <li>Led requirements discovery, process analysis and feature definition — translating business needs into structured workflows, user journeys and user stories, <strong>reducing rework significantly</strong> across delivery teams.</li>
+            <li>Partnered with product owners to prioritise features, manage backlogs and align delivery with business value inside <strong>Agile SAFe environments</strong>.</li>
+            <li>Delivered platform enhancements contributing to <strong>~80% reduction in claim processing time</strong> for an insurance client.</li>
+            <li>Led AI-driven product initiatives including early exploration of <strong>Pega GenAI, AI Agent design and agentic AI capabilities</strong>.</li>
+          </ul>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Nordic Retail Banking</span>
+            <span class="footer-tag">Swedish Public Sector</span>
+            <span class="footer-tag amber">EU Insurance</span>
+            <span class="footer-tag amber">Transport &amp; Logistics</span>
+          </div>
+        </article>
+
+        <article class="float-card tilt-right reveal-card">
+          <div class="card-eyebrow">Workflow Era</div>
+          <div class="card-period">2019.08 — 2021.10 &nbsp;·&nbsp; India</div>
+          <h3 class="card-company">Instasmart <em>(Truviq)</em></h3>
+          <div class="card-role">Workflow Automation Developer</div>
+          <div class="card-domain">Vendor Management · E-commerce</div>
+          <div class="card-divider"></div>
+          <ul class="card-bullets">
+            <li>Contributed to workflow-driven platforms supporting <strong>large-scale vendor management operations including Amazon</strong>, working within Agile teams.</li>
+            <li>Translated requirements into case types, workflows, SLAs and decision logic, enabling scalable automation of complex <strong>vendor onboarding operations</strong>.</li>
+            <li>Produced user stories and acceptance criteria, reducing rework during implementation cycles.</li>
+            <li>Designed workflow interactions and UI components to improve usability and adoption across internal users.</li>
+          </ul>
+        </article>
+
+        <article class="float-card tilt-left reveal-card">
+          <div class="card-eyebrow">Foundations</div>
+          <div class="card-period">2016.02 — 2019.07 &nbsp;·&nbsp; India</div>
+          <h3 class="card-company">HDFC <em>Bank Ltd</em></h3>
+          <div class="card-role">QA Tester — Corporate Banking &amp; Finance</div>
+          <div class="card-domain">Enterprise Banking · Regulated Environment</div>
+          <div class="card-divider"></div>
+          <ul class="card-bullets">
+            <li>Designed test scenarios aligned with real-world banking workflows across enterprise digital platforms in a <strong>highly regulated environment</strong>.</li>
+            <li>Supported automation initiatives using <strong>UiPath RPA</strong>, improving efficiency in testing and defect management processes.</li>
+            <li>Identified defects and edge cases early, reducing downstream production issues and improving overall system quality.</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PORTAL / CONTACT ── -->
+  <section id="contact">
+    <div class="portal" aria-hidden="true">
+      <div class="portal-ring"></div>
+      <div class="portal-ring"></div>
+      <div class="portal-ring"></div>
+      <div class="portal-ring"></div>
+      <div class="portal-core"></div>
+      <div class="portal-content">
+        <div class="portal-eyebrow">— Final Act</div>
+        <h3 class="portal-title">Let's <em>talk.</em></h3>
+      </div>
+    </div>
+
+    <p class="portal-body">
+      Looking for Product Manager, Product Owner or AI Builder PM roles in Stockholm and worldwide remotely — available immediately for the next project. I own end-to-end product delivery, unblock teams through intelligent automation, and ship AI-driven solutions at scale.
+    </p>
+
+    <div class="portal-channels">
+      <a href="mailto:hello.priyankapm@gmail.com" class="channel primary">✉ &nbsp;hello.priyankapm@gmail.com</a>
+      <a href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" rel="noopener" class="channel">↗ &nbsp;LinkedIn</a>
+      <a href="https://wa.me/46737810307" target="_blank" rel="noopener" class="channel">💬 &nbsp;WhatsApp</a>
+      <a href="#" class="channel">↓ &nbsp;Download CV</a>
+    </div>
+
+    <div class="portal-coord">
+      Stockholm <span class="dot">◇</span> 59° 19′ N <span class="dot">◇</span> Available Worldwide
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 — Priyanka Das &nbsp;·&nbsp; Atelier Preview &nbsp;·&nbsp; v0.2
+</footer>
+
+<div class="preview-switch">
+  <a href="index.html">Live</a>
+  <a href="preview.html">Preview 1</a>
+  <a href="preview2.html" class="active">Preview 2</a>
+</div>
+
+<script>
+// ── DUST MOTES (soft, slow, fewer than preview 1) ──
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c = document.getElementById('dust');
+  const ctx = c.getContext('2d');
+  let w, h, dpr;
+  const motes = [];
+  const count = window.innerWidth < 768 ? 35 : 70;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    c.width = w * dpr; c.height = h * dpr;
+    c.style.width = w + 'px'; c.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const colors = [
+    { r: 255, g: 93,  b: 158 },  // magenta
+    { r: 255, g: 180, b: 84  },  // amber
+    { r: 184, g: 224, b: 255 },  // ice
+    { r: 245, g: 236, b: 222 }   // pearl
+  ];
+
+  for (let i = 0; i < count; i++) {
+    motes.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.8 + 0.6,
+      vx: (Math.random() - 0.5) * 0.08,
+      vy: -Math.random() * 0.12 - 0.04,
+      o: Math.random() * 0.4 + 0.15,
+      twinkle: Math.random() * Math.PI * 2,
+      twinkleSpeed: 0.008 + Math.random() * 0.012,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, w, h);
+    motes.forEach(m => {
+      m.x += m.vx;
+      m.y += m.vy;
+      m.twinkle += m.twinkleSpeed;
+      const opacity = m.o * (0.5 + 0.5 * Math.sin(m.twinkle));
+
+      if (m.y < -10)   m.y = h + 10;
+      if (m.x < -10)   m.x = w + 10;
+      if (m.x > w + 10) m.x = -10;
+
+      ctx.fillStyle = `rgba(${m.color.r}, ${m.color.g}, ${m.color.b}, ${opacity})`;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Soft glow halo
+      ctx.fillStyle = `rgba(${m.color.r}, ${m.color.g}, ${m.color.b}, ${opacity * 0.08})`;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r * 6, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+// ── HERO TITLE: MOUSE PARALLAX ──
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const title = document.getElementById('heroTitle');
+  if (!title) return;
+  let tx = 0, ty = 0, cx = 0, cy = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    tx = (e.clientX / window.innerWidth - 0.5) * 14;
+    ty = (e.clientY / window.innerHeight - 0.5) * 8;
+  });
+
+  function loop() {
+    cx += (tx - cx) * 0.06;
+    cy += (ty - cy) * 0.06;
+    title.style.transform = `translate3d(${cx}px, ${cy}px, 0) rotateX(${-cy * 0.15}deg) rotateY(${cx * 0.15}deg)`;
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// ── REVEAL CARDS + ACTS ──
+(function() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal-card').forEach(el => obs.observe(el));
+  document.querySelectorAll('.reveal-act').forEach(el => obs.observe(el));
+})();
+
+// ── ACTIVE SECTION (side index) ──
+(function() {
+  const sections = ['hero', 'act-1', 'experience', 'contact'];
+  const links = document.querySelectorAll('.index-side a');
+  function onScroll() {
+    let active = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.4) active = id;
+    });
+    links.forEach(a => a.classList.toggle('active', a.dataset.target === active));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+// ── SUBTLE CARD TILT ON MOUSE (desktop only) ──
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.innerWidth < 900) return;
+
+  document.querySelectorAll('.float-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width  - 0.5;
+      const py = (e.clientY - rect.top)  / rect.height - 0.5;
+      card.style.transform = `translateY(0) rotateX(${-py * 3}deg) rotateY(${px * 3}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+    });
+  });
+})();
+</script>
+</body>
+</html>
