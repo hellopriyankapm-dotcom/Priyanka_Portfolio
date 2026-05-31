@@ -344,6 +344,53 @@
   }
   .outcome-label { color: var(--muted); font-size: 0.83rem; line-height: 1.55; margin-top: 0.6rem; max-width: 22ch; }
 
+  /* ═════════════ NEWSLETTER MEMO BAND ═════════════ */
+  .memo-section { padding: 0 0 5rem; }
+  .memo-band {
+    display: flex; align-items: center; gap: 1.1rem;
+    padding: 1rem 1.4rem; border-radius: var(--r);
+    background: linear-gradient(180deg, var(--surface), var(--bg-2));
+    text-decoration: none; color: inherit;
+    position: relative; overflow: hidden;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s;
+  }
+  .memo-band::before {
+    content: ''; position: absolute; inset: 0;
+    border-radius: var(--r); padding: 1px;
+    background: linear-gradient(110deg, var(--teal), var(--indigo), var(--violet), var(--teal));
+    background-size: 250% auto;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
+    animation: gradFlow 8s ease-in-out infinite;
+  }
+  .memo-band:hover { transform: translateY(-2px); box-shadow: 0 20px 50px -20px rgba(94,234,212,0.3); }
+  .memo-mark {
+    width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+    display: grid; place-items: center; font-size: 1.05rem;
+    background: linear-gradient(135deg, rgba(94,234,212,0.2), rgba(192,132,252,0.2));
+    border: 1px solid rgba(94,234,212,0.3);
+  }
+  .memo-text { flex: 1; min-width: 0; font-size: 0.95rem; line-height: 1.4; }
+  .memo-text b { font-weight: 600; }
+  .memo-text .memo-sub { display: block; color: var(--muted); font-size: 0.83rem; margin-top: 0.15rem; }
+  .memo-cta {
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+    color: var(--teal); padding: 0.5rem 1rem;
+    border: 1px solid rgba(94,234,212,0.4); border-radius: 999px;
+    flex-shrink: 0; white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
+  }
+  .memo-band:hover .memo-cta { background: var(--teal); color: var(--bg); }
+  @media (max-width: 720px) {
+    .memo-band { flex-wrap: wrap; padding: 0.9rem 1rem; }
+    .memo-cta { width: 100%; text-align: center; }
+  }
+
+  /* nav memo link styling */
+  .nav-links a.memo-link { color: var(--teal); }
+  .nav-links a.memo-link:hover { color: var(--text); background: var(--surface); }
+
   /* ═════════════ TESTIMONIALS ═════════════ */
   .testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
   .testi {
@@ -713,6 +760,7 @@
       <a href="#experience">Experience</a>
       <a href="#philosophy">Philosophy</a>
       <a href="#testimonials">Voices</a>
+      <a href="https://theoutcomememo.substack.com/" target="_blank" rel="noopener noreferrer" class="memo-link" aria-label="The Outcome Memo newsletter">Memo ↗</a>
     </nav>
     <a href="#contact" class="nav-cta">Contact →</a>
   </div>
@@ -948,6 +996,20 @@
   </div>
 </section>
 
+<!-- ════════════════════ NEWSLETTER ════════════════════ -->
+<section class="memo-section" aria-label="Newsletter">
+  <div class="wrap">
+    <a href="https://theoutcomememo.substack.com/" target="_blank" rel="noopener noreferrer" class="memo-band reveal">
+      <span class="memo-mark">✉</span>
+      <span class="memo-text">
+        <b>The Outcome Memo</b> · weekly
+        <span class="memo-sub">These principles in practice — AI, PM, decisioning.</span>
+      </span>
+      <span class="memo-cta">Subscribe ↗</span>
+    </a>
+  </div>
+</section>
+
 <!-- ════════════════════ TESTIMONIALS ════════════════════ -->
 <section id="testimonials" class="block">
   <div class="wrap">
@@ -1133,6 +1195,7 @@
         <h4>Channels</h4>
         <a href="mailto:hello@buildwithpriyanka.com">Email</a>
         <a href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://theoutcomememo.substack.com/" target="_blank" rel="noopener noreferrer">The Outcome Memo ↗</a>
       </div>
       <div class="foot-col">
         <h4>Work</h4>
