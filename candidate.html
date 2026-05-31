@@ -66,10 +66,19 @@
     font-weight: 600; font-size: 0.92rem; text-decoration: none; color: var(--text);
   }
   .logo-mark {
-    width: 30px; height: 30px; border-radius: 50%;
-    background: conic-gradient(from 0deg, var(--teal), var(--indigo), var(--violet), var(--pink), var(--teal));
-    box-shadow: 0 0 16px rgba(129,140,248,0.5);
-    animation: spin 8s linear infinite;
+    width: 36px; height: 36px; border-radius: 50%;
+    background-image: url('priyanka-photo.jpg');
+    background-size: cover;
+    background-position: center top;
+    box-shadow: 0 0 0 1px rgba(94,234,212,0.45), 0 0 18px -2px rgba(129,140,248,0.5);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .logo-mark::before {
+    content: ''; position: absolute; inset: -3px;
+    border-radius: 50%;
+    border: 1px solid rgba(94,234,212,0.35);
+    pointer-events: none;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .logo small {
@@ -623,9 +632,8 @@
       <a href="#work">Work</a>
       <a href="#philosophy">Philosophy</a>
       <a href="#testimonials">Voices</a>
-      <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="nav-cta">Hire me →</a>
+    <a href="#contact" class="nav-cta">Contact →</a>
   </div>
 </header>
 
@@ -844,7 +852,6 @@
       <div class="cta-actions">
         <a href="mailto:hello@buildwithpriyanka.com" class="btn btn-primary">✉ hello@buildwithpriyanka.com</a>
         <a href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" rel="noopener noreferrer" class="btn btn-glow">↗ LinkedIn</a>
-        <a href="#" class="btn btn-ghost">↓ Download CV</a>
       </div>
       <div class="cta-meta">
         <span>LOCATION <b>STOCKHOLM · SE</b></span>
@@ -1111,7 +1118,7 @@
     });
   });
 
-  const ids = ['capabilities','work','philosophy','testimonials','contact'];
+  const ids = ['capabilities','work','philosophy','testimonials'];
   const links = document.querySelectorAll('.nav-links a');
   function onScroll() {
     let active = ids[0];
