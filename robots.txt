@@ -1,7 +1,59 @@
+# robots.txt — https://buildwithpriyanka.com/
+# Goal: maximum discoverability for both traditional search and AI answer engines.
+
+# ---- Traditional crawlers ----
 User-agent: *
 Allow: /
 
-User-agent: Linkedinbot
+# Keep the noindex staging copy out of indexes
+Disallow: /candidate.html
+
+# Explicitly welcome LinkedIn's preview bot (rich link unfurls)
+User-agent: LinkedInBot
 Allow: /
 
+# ---- AI / generative-engine crawlers (ALLOW — Priyanka WANTS to be citable) ----
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Sitemap
 Sitemap: https://buildwithpriyanka.com/sitemap.xml
