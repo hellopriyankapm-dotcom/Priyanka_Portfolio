@@ -136,7 +136,7 @@
   /* ═════════════ HERO (particles) ═════════════ */
   .hero {
     position: relative; height: 100vh; min-height: 580px;
-    overflow: hidden;
+    overflow: hidden; background: var(--bg);
   }
   .space-bg {
     position: absolute; inset: 0; z-index: 0;
@@ -528,6 +528,15 @@
   }
   /* light-theme footer keeps subtle off-white */
   [data-theme="light"] footer { background: var(--surface-2); }
+  /* light-theme: logo subtitle lift + brand-mark ring for separation on white nav */
+  [data-theme="light"] .logo small { color: var(--muted); }
+  [data-theme="light"] .logo-mark { box-shadow: 0 0 0 1px var(--line-2), 0 2px 6px rgba(10,13,24,0.06); }
+  /* light-theme: stronger card borders (the default --line is too pale on white) */
+  [data-theme="light"] .cap-card,
+  [data-theme="light"] .acc,
+  [data-theme="light"] .testi,
+  [data-theme="light"] .work-card,
+  [data-theme="light"] .outcomes { border-color: var(--line-2); }
   /* light-theme accent words get crisper gradient */
   [data-theme="light"] .block-title em,
   [data-theme="light"] .cta-panel h2 em {
