@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case study: 1 week → 2 hours · Swedish Unemployment Assessment Platform — Priyanka Das</title>
+<meta name="description" content="How Priyanka Das (AI PM &amp; Business Architect) cut a week-long Swedish/German unemployment benefits assessment to 2–3 hours — across 26 A-Kassa funds, serving 500K+ users per year." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://buildwithpriyanka.com/work/unemployment.html" />
+
+<!-- favicons (one level up) -->
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="../favicon-96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+
+<!-- social -->
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://buildwithpriyanka.com/work/unemployment.html" />
+<meta property="og:title" content="Case study: 1 week → 2 hours · Swedish Unemployment Assessment Platform" />
+<meta property="og:description" content="How a PM/Business Architect aligned 26 A-Kassa funds on one schema and cut a week-long benefits journey to 2–3 hours, serving 500K+ users/year." />
+<meta property="og:image" content="https://buildwithpriyanka.com/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Case study: 1 week → 2 hours · Swedish Unemployment Assessment Platform" />
+<meta name="twitter:description" content="Public sector PM work — 26 funds, one schema, 96% faster journey." />
+<meta name="twitter:image" content="https://buildwithpriyanka.com/og-image.jpg" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cutting a week-long benefits journey to 2 hours — across 26 funds",
+  "description": "How Priyanka Das aligned 26 A-Kassa funds on a unified REST schema and reduced a paper-heavy Swedish/German unemployment assessment from one week to 2–3 hours.",
+  "datePublished": "2026-05-31",
+  "author": {"@type": "Person", "name": "Priyanka Das", "url": "https://buildwithpriyanka.com/"},
+  "publisher": {"@type": "Person", "name": "Priyanka Das"},
+  "image": "https://buildwithpriyanka.com/og-image.jpg",
+  "mainEntityOfPage": "https://buildwithpriyanka.com/work/unemployment.html"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #04050a; --bg-2: #07090f; --surface: #11141f; --surface-2: #181c2a;
+    --line: #1d2235; --line-2: #2a3047;
+    --teal: #5eead4; --indigo: #818cf8; --violet: #c084fc; --pink: #f0abfc; --emerald: #34d399;
+    --text: #f2f4fa; --text-2: #cdd2e0; --muted: #868ea4; --muted-2: #545b73;
+    --sans: 'Inter', system-ui, sans-serif;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --r: 14px; --r-sm: 10px; --r-lg: 20px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; background: var(--bg); }
+  body {
+    font-family: var(--sans); color: var(--text); line-height: 1.7;
+    background:
+      radial-gradient(700px 400px at 80% -10%, rgba(129,140,248,0.08), transparent 70%),
+      radial-gradient(600px 400px at 10% 110%, rgba(94,234,212,0.06), transparent 70%),
+      var(--bg);
+    -webkit-font-smoothing: antialiased; min-height: 100vh;
+  }
+  ::selection { background: rgba(129,140,248,0.35); }
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { color: var(--text); }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    backdrop-filter: blur(18px) saturate(170%);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    background: rgba(4,5,10,0.65);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 800px; margin: 0 auto;
+    height: 60px; padding: 0 1.5rem;
+  }
+  .back {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--mono); font-size: 0.78rem; color: var(--muted);
+    text-decoration: none; padding: 0.4rem 0.85rem;
+    border-radius: 8px; transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .back:hover { background: var(--surface); color: var(--text); }
+  .crumb {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--muted-2);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .crumb b { color: var(--teal); font-weight: 500; }
+
+  main { max-width: 760px; margin: 0 auto; padding: 4.5rem 1.5rem 6rem; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--teal);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    margin-bottom: 1.1rem;
+  }
+  .eyebrow::before { content: ''; width: 22px; height: 1px; background: linear-gradient(90deg, var(--teal), transparent); }
+
+  h1 {
+    font-weight: 500; letter-spacing: -0.035em;
+    font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.07;
+    margin-bottom: 0.9rem;
+  }
+  h1 em {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    background: linear-gradient(110deg, var(--teal), var(--indigo), var(--violet), var(--teal));
+    background-size: 250% auto;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gradFlow 8s ease-in-out infinite;
+  }
+  @keyframes gradFlow {
+    0%,100% { background-position: 0% center; }
+    50%     { background-position: 100% center; }
+  }
+
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.3rem; margin-bottom: 2.8rem;
+  }
+  .meta span {
+    font-family: var(--mono); font-size: 0.68rem; color: var(--muted);
+    padding: 0.32rem 0.7rem; border: 1px solid var(--line); border-radius: 999px;
+    letter-spacing: 0.05em;
+  }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line-2); border-radius: var(--r-lg);
+    overflow: hidden; margin-bottom: 3rem;
+    background:
+      radial-gradient(500px 200px at 50% 0%, rgba(94,234,212,0.12), transparent 60%),
+      linear-gradient(180deg, var(--surface), var(--bg-2));
+  }
+  .stat { padding: 1.4rem 1rem; text-align: center; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat-val {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.7rem, 3.5vw, 2.3rem); letter-spacing: -0.02em; line-height: 1;
+    background: linear-gradient(180deg, var(--text), var(--text-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .stat-val .u { font-family: var(--sans); font-size: 0.55em; color: var(--teal); -webkit-text-fill-color: var(--teal); margin-left: 1px; }
+  .stat-lbl { font-size: 0.74rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.45; }
+
+  h2 {
+    font-weight: 500; letter-spacing: -0.025em;
+    font-size: clamp(1.4rem, 2.8vw, 1.8rem); line-height: 1.2;
+    margin-top: 3rem; margin-bottom: 0.7rem;
+  }
+  h2::before {
+    content: ''; display: inline-block; width: 22px; height: 1px;
+    background: var(--teal); vertical-align: middle; margin-right: 0.7rem;
+    transform: translateY(-3px);
+  }
+
+  p {
+    color: var(--text-2); font-size: 1.02rem;
+    margin-bottom: 1.1rem;
+    font-weight: 300;
+  }
+  p strong { color: var(--text); font-weight: 500; }
+
+  .pull {
+    margin: 2.3rem 0;
+    padding: 1.4rem 1.6rem;
+    border-left: 2px solid var(--teal);
+    background: linear-gradient(90deg, rgba(94,234,212,0.06), transparent);
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.25rem; line-height: 1.5; color: var(--text);
+  }
+
+  ul { margin: 0 0 1.5rem 0; list-style: none; }
+  li {
+    position: relative; padding-left: 1.4rem; margin-bottom: 0.6rem;
+    color: var(--text-2); font-weight: 300;
+  }
+  li::before {
+    content: ''; position: absolute; left: 0; top: 0.65em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--teal);
+  }
+  li b { color: var(--text); font-weight: 500; }
+
+  .tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 2.5rem;
+  }
+  .tag {
+    font-family: var(--mono); font-size: 0.66rem;
+    padding: 0.25rem 0.65rem; border-radius: 6px;
+    background: var(--surface-2); color: var(--text-2);
+    border: 1px solid var(--line-2);
+  }
+
+  .footer-cta {
+    margin-top: 4rem; padding: 2.4rem; text-align: center;
+    border: 1px solid var(--line-2); border-radius: var(--r-lg);
+    background:
+      radial-gradient(600px 300px at 50% 100%, rgba(94,234,212,0.12), transparent 60%),
+      linear-gradient(180deg, var(--surface), var(--bg-2));
+  }
+  .footer-cta p { color: var(--text-2); max-width: 50ch; margin: 0 auto 1.3rem; font-size: 1rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.4rem; border-radius: 11px; font-size: 0.92rem; font-weight: 500;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary {
+    background: linear-gradient(120deg, var(--teal), var(--indigo)); color: #04050a;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(94,234,212,0.55); }
+  .btn-ghost { border: 1px solid var(--line-2); color: var(--text-2); margin-left: 0.5rem; }
+  .btn-ghost:hover { border-color: var(--teal); color: var(--text); transform: translateY(-2px); }
+
+  footer {
+    text-align: center; padding: 2rem 1rem 3rem;
+    border-top: 1px solid var(--line); margin-top: 3rem;
+    font-family: var(--mono); font-size: 0.72rem; color: var(--muted-2);
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 600px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+    .topbar-inner { padding: 0 1rem; }
+    .crumb { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="../" class="back">← Priyanka Das</a>
+    <div class="crumb">CASE STUDY <b>· UNEMPLOYMENT PLATFORM</b></div>
+  </div>
+</header>
+
+<main>
+  <div class="eyebrow">Case study · Public sector · 2021–2023</div>
+  <h1>Cutting a week-long benefits journey to <em>2 hours</em> — across 26 funds.</h1>
+
+  <div class="meta">
+    <span>ROLE: PM · BUSINESS ARCHITECT</span>
+    <span>DOMAIN: PUBLIC SECTOR</span>
+    <span>GEOGRAPHY: SE / DE</span>
+    <span>SCALE: 500K+ USERS/YEAR</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-val">96<span class="u">%</span></div><div class="stat-lbl">journey-time reduction</div></div>
+    <div class="stat"><div class="stat-val">500<span class="u">K+</span></div><div class="stat-lbl">users served/year</div></div>
+    <div class="stat"><div class="stat-val">26</div><div class="stat-lbl">A-Kassa funds aligned</div></div>
+    <div class="stat"><div class="stat-val">1</div><div class="stat-lbl">unified REST schema</div></div>
+  </div>
+
+  <h2>The problem</h2>
+  <p>
+    Swedish &amp; German unemployment benefits weren't broken because the technology was bad. They were broken because <strong>26 different A-Kassa funds</strong> — each with its own data contracts, eligibility rules, internal politics and operational pace — were trying to serve one citizen through 26 different paper-heavy processes. Caseworkers had to re-key the same information into incompatible systems. A typical first assessment took <strong>five working days</strong> end-to-end. People who had just lost their jobs were waiting a week to know if they qualified for support.
+  </p>
+
+  <h2>What I owned</h2>
+  <p>
+    I was embedded as the Product Manager / Business Architect across the platform programme: discovery through phased rollout. That meant <strong>requirements discovery with caseworkers across multiple funds</strong>, defining the PRD and roadmap, prioritising backlog with the engineering org, and running the alignment workshops that turned 26 different stakeholder positions into one schema everyone could ship against.
+  </p>
+
+  <h2>Approach</h2>
+  <p>
+    The instinct most people had was to build 26 integrations. I argued the opposite: <strong>one canonical REST schema, with a per-fund migration runway</strong>. Each fund kept its existing internal system; the schema was the contract between them and the unified assessment platform. Funds with simpler workflows went first and proved the model; the more complex ones came later with confidence baked in.
+  </p>
+  <p>
+    The hard work wasn't technical. It was running <strong>two rounds of discovery workshops</strong> with caseworkers across multiple funds, then mapping each fund's actual day-to-day workflow against the proposed schema and surfacing every edge case before we shipped. Decisions were documented as auditable trade-offs — what we explicitly chose to support, what we explicitly de-scoped, and what was reversible in v2.
+  </p>
+
+  <div class="pull">
+    The unlock wasn't a better system. It was getting twenty-six stakeholder funds to agree on one customer schema. The tech was the easy part.
+  </div>
+
+  <h2>Outcome</h2>
+  <ul>
+    <li><b>96% journey-time reduction</b> — first assessment went from ~1 week to <b>2–3 hours</b>.</li>
+    <li><b>500K+ users served per year</b> on the unified platform.</li>
+    <li><b>26 A-Kassa funds</b> aligned on a single roadmap and one REST schema.</li>
+    <li><b>60–70% less manual casework</b> on the back end — caseworker time freed for genuinely complex cases.</li>
+    <li>The schema became the platform's <b>long-term data contract</b> for downstream services beyond the original scope.</li>
+  </ul>
+
+  <h2>What I'd carry forward</h2>
+  <p>
+    Two lessons. First — in regulated, multi-stakeholder environments, the value of a <strong>documented trade-off</strong> compounds. Every reversible decision needed an explicit rationale, and that rationale paid for itself the third time a steering committee challenged it. Second — <strong>discovery is not a phase, it's a posture</strong>. We kept caseworker interviews running through rollout, and most of the post-launch fixes came from the same workshops we'd used at discovery.
+  </p>
+
+  <div class="tags">
+    <span class="tag">PRODUCT MANAGEMENT</span>
+    <span class="tag">BUSINESS ARCHITECTURE</span>
+    <span class="tag">PUBLIC SECTOR</span>
+    <span class="tag">PEGA</span>
+    <span class="tag">STAKEHOLDER ALIGNMENT</span>
+    <span class="tag">REST API DESIGN</span>
+    <span class="tag">SAFe AGILE</span>
+    <span class="tag">DISCOVERY → ROLLOUT</span>
+  </div>
+
+  <div class="footer-cta">
+    <p>Need someone to align stakeholders, design the schema, and ship the thing? That's what I do.</p>
+    <a href="mailto:hello@buildwithpriyanka.com" class="btn btn-primary">✉ hello@buildwithpriyanka.com</a>
+    <a href="../" class="btn btn-ghost">← Back to portfolio</a>
+  </div>
+</main>
+
+<footer>© 2026 PRIYANKA DAS · STOCKHOLM · CASE STUDY</footer>
+</body>
+</html>
