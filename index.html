@@ -239,7 +239,8 @@
   }
   .block-title em {
     font-family: var(--serif); font-style: italic; font-weight: 400;
-    background: linear-gradient(120deg, var(--teal), var(--indigo));
+    background: linear-gradient(110deg, var(--teal) 0%, var(--indigo) 28%, var(--violet) 52%, var(--pink) 70%, var(--teal) 100%);
+    background-size: 250% auto; background-position: 0% center;
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .block-sub {
@@ -406,9 +407,19 @@
   }
   .cta-panel h2 em {
     font-family: var(--serif); font-style: italic; font-weight: 400;
-    background: linear-gradient(120deg, var(--teal), var(--indigo));
+    background: linear-gradient(110deg, var(--teal) 0%, var(--indigo) 28%, var(--violet) 52%, var(--pink) 70%, var(--teal) 100%);
+    background-size: 250% auto; background-position: 0% center;
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
+
+  /* animated gradient flow for accent words — runs while in view */
+  @keyframes gradFlow {
+    0%   { background-position:   0% center; }
+    50%  { background-position: 100% center; }
+    100% { background-position:   0% center; }
+  }
+  .grad-flow { animation: gradFlow 6s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { .grad-flow { animation: none; } }
   .cta-panel p { color: var(--text-2); max-width: 56ch; margin: 0 auto 2.4rem; font-size: 1.05rem; line-height: 1.7; font-weight: 300; }
   .cta-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; }
   .btn {
@@ -1361,6 +1372,12 @@
 
   const obs2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs2.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => obs2.observe(el));
+
+  // Animate the gradient accent words only while they're on screen.
+  const gradObs = new IntersectionObserver(es => es.forEach(e => {
+    e.target.classList.toggle('grad-flow', e.isIntersecting);
+  }), { threshold: 0.2 });
+  document.querySelectorAll('.block-title em, .cta-panel h2 em').forEach(el => gradObs.observe(el));
 
   document.querySelectorAll('[data-glow]').forEach(card => {
     card.addEventListener('mousemove', (e) => {
