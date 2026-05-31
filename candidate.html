@@ -844,7 +844,6 @@
       <div class="cta-actions">
         <a href="mailto:hello@buildwithpriyanka.com" class="btn btn-primary">✉ hello@buildwithpriyanka.com</a>
         <a href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" rel="noopener noreferrer" class="btn btn-glow">↗ LinkedIn</a>
-        <a href="https://wa.me/46737810307" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">💬 WhatsApp</a>
         <a href="#" class="btn btn-ghost">↓ Download CV</a>
       </div>
       <div class="cta-meta">
@@ -874,7 +873,6 @@
         <h4>Channels</h4>
         <a href="mailto:hello@buildwithpriyanka.com">Email</a>
         <a href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://wa.me/46737810307" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <div class="foot-col">
         <h4>Previews</h4>
@@ -1145,7 +1143,7 @@
   const CARD = {
     metrics(items) { return `<div class="gen-card"><div class="gc-label">Impact snapshot</div><div class="gc-metrics">${items.map(m => `<div class="gc-metric"><div class="v">${m.v}<span class="u">${m.u || ''}</span></div><div class="l">${m.l}</div></div>`).join('')}</div></div>`; },
     chips(label, items) { return `<div class="gen-card"><div class="gc-label">${label}</div><div class="gc-chips">${items.map(c => `<span class="gc-chip">${c}</span>`).join('')}</div></div>`; },
-    contact() { return `<div class="gen-card"><div class="gc-label">Open a channel</div><div class="gc-actions"><a class="gc-btn primary" href="mailto:hello@buildwithpriyanka.com">✉ Email</a><a class="gc-btn ghost" href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" rel="noopener noreferrer">↗ LinkedIn</a><a class="gc-btn ghost" href="https://wa.me/46737810307" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a></div></div>`; }
+    contact() { return `<div class="gen-card"><div class="gc-label">Open a channel</div><div class="gc-actions"><a class="gc-btn primary" href="mailto:hello@buildwithpriyanka.com">✉ Email</a><a class="gc-btn ghost" href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" rel="noopener noreferrer">↗ LinkedIn</a></div></div>`; }
   };
 
   const METRICS = [{ v:'80', u:'%', l:'claim-time cut' }, { v:'1.2', u:'M', l:'users served' }, { v:'26', u:'', l:'funds aligned' }, { v:'9', u:'yrs', l:'regulated domains' }];
