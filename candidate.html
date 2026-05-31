@@ -579,17 +579,6 @@
   .send:hover { transform: translateY(-1px); }
   .send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
-  /* preview switcher */
-  .preview-switch {
-    position: fixed; top: 70px; right: 14px; z-index: 60;
-    display: flex; gap: 0.25rem; padding: 0.35rem;
-    background: rgba(11,14,23,0.85); backdrop-filter: blur(14px);
-    border: 1px solid var(--line-2); border-radius: 999px; font-size: 0.66rem;
-  }
-  .preview-switch a { padding: 0.4rem 0.65rem; color: var(--muted); text-decoration: none; border-radius: 999px; transition: all 0.2s; }
-  .preview-switch a:hover { color: var(--text); }
-  .preview-switch a.active { background: linear-gradient(120deg, var(--teal), var(--indigo)); color: #04050a; font-weight: 600; }
-
   /* reveal */
   .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
   .reveal.in { opacity: 1; transform: none; }
@@ -607,7 +596,6 @@
     .foot-grid { grid-template-columns: 1fr 1fr; }
     section.block { padding: 4.5rem 0 2.5rem; }
     .cta-panel { padding: 3rem 1.4rem; }
-    .preview-switch { top: 64px; font-size: 0.6rem; }
     .hero-controls { display: none; }
     .hero-caption { bottom: 22vh; }
     .ask-launcher { bottom: 16px; right: 16px; padding: 0.6rem 1rem 0.6rem 0.7rem; font-size: 0.78rem; }
@@ -636,19 +624,6 @@
     <a href="#contact" class="nav-cta">Contact →</a>
   </div>
 </header>
-
-<!-- preview switcher -->
-<div class="preview-switch">
-  <a href="index.html">Live</a>
-  <a href="preview.html">P1</a>
-  <a href="preview2.html">P2</a>
-  <a href="preview3.html">P3</a>
-  <a href="preview4.html">P4</a>
-  <a href="preview5.html">P5</a>
-  <a href="preview6.html">P6</a>
-  <a href="preview7.html">P7</a>
-  <a href="candidate.html" class="active">★ Candidate</a>
-</div>
 
 <!-- ════════════════════ HERO (particles) ════════════════════ -->
 <section class="hero" id="hero">
@@ -882,15 +857,15 @@
         <a href="https://www.linkedin.com/in/pmpriyanka/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
       <div class="foot-col">
-        <h4>Previews</h4>
-        <a href="preview.html">P1 · Mission Console</a>
-        <a href="preview7.html">P7 · Particle Genesis</a>
-        <a href="index.html">Live site</a>
+        <h4>Work</h4>
+        <a href="https://pmprepos.com" target="_blank" rel="noopener noreferrer">PrepOS ↗</a>
+        <a href="#work">Selected projects</a>
+        <a href="#capabilities">Capabilities</a>
       </div>
     </div>
     <div class="foot-base">
       <span>© 2026 Priyanka Das · Stockholm, Sweden</span>
-      <span>Candidate build · Particle Hero + Studio + Ask AI</span>
+      <span>AI PM · Business Architect</span>
     </div>
   </div>
 </footer>
