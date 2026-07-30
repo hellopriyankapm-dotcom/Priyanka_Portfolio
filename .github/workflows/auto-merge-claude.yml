@@ -2,26 +2,20 @@ name: Auto Merge
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   auto-merge:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Detect default branch
-        run: |
-          DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef -q '.defaultBranchRef.name')
-          echo "Using branch: $DEFAULT_BRANCH"
-
-      - name: Create Pull Request
-        run: |
-          gh pr create --base $DEFAULT_BRANCH --head $DEFAULT_BRANCH
-
-      - name: Merge Pull Request
-        run: |
-          gh pr merge --auto --base $DEFAULT_BRANCH
+      - name: Enable auto-merge
+        run: gh pr merge --auto --squash "$PR_NUMBER"
